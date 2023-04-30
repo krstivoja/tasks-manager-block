@@ -13,20 +13,13 @@
  * @package           create-block
  */
 
-include_once 'inc/cpt.php';
-include_once 'inc/taxonomy.php';
-include_once 'inc/functions.php';
-
-function enqueue_sortable_scripts() {
-    if (current_user_can('administrator')) {
-        wp_enqueue_script('sortablejs', 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js', array(), null, true);
-        wp_enqueue_script('tasks-sortable', plugin_dir_url(__FILE__) . 'js/tasks-sortable.js', array('jquery', 'sortablejs'), '1.0.0', true);
-        wp_localize_script('tasks-sortable', 'ajaxObject', array('ajaxUrl' => admin_url('admin-ajax.php')));
-    }
-}
-add_action('wp_enqueue_scripts', 'enqueue_sortable_scripts');
-
-
+/**
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
+ * through the block editor in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/reference/functions/register_block_type/
+ */
 function create_block_tasks_manager_block_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }

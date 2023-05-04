@@ -1,4 +1,5 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
 	"name": "tasks-manager/tasks-progress",
 	"title": "Tasks Progress",
@@ -6,11 +7,13 @@
 	"category": "common",
 	"attributes": {},
 	"supports": {
-	  "html": false
+		"align": [ "wide", "full" ],
+		"anchor": true,
+		"html": true
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
 	"renderCallback": "tasks_shortcode"
-  }
+}
   

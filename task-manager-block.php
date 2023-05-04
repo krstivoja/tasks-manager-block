@@ -32,13 +32,10 @@ add_action( 'init', 'create_block_task_manager_block_block_init' );
 // Load scripts
 // **************************************************
 function enqueue_sortable_scripts() {
-    if (current_user_can('administrator')) {
+    if (current_user_can('administrator') && has_block('tasks-manager/tasks-progress')) {
         wp_enqueue_script('sortablejs', 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js', array(), null, true);
-        wp_enqueue_script('tasks-sortable', plugin_dir_url(__FILE__) . 'src/tasks-sortable.js', array('jquery', 'sortablejs'), '1.0.0', true);
+        wp_enqueue_script('tasks-sortable', plugin_dir_url(__FILE__) . 'inc/tasks-sortable.js', array('jquery', 'sortablejs'), '1.0.0', true);
         wp_localize_script('tasks-sortable', 'ajaxObject', array('ajaxUrl' => admin_url('admin-ajax.php')));
     }
-
-    wp_enqueue_style('manager-style', plugin_dir_url(__FILE__) . 'css/manager-style.css'); // Added this line to enqueue the CSS file
-
 }
 add_action('wp_enqueue_scripts', 'enqueue_sortable_scripts');

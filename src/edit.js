@@ -1,4 +1,5 @@
 import { ServerSideRender } from '@wordpress/editor';
+import './editor.scss';
 
 const Edit = (props) => {
   return (

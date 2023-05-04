@@ -4,6 +4,8 @@ import { ServerSideRender } from '@wordpress/editor';
 import { createElement } from '@wordpress/element';
 import Edit from './edit';
 
+import './style.scss';
+
 registerBlockType('tasks-manager/tasks-progress', {
   title: __('Tasks Progress'),
   icon: 'list-view',

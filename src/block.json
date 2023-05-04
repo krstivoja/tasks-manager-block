@@ -9,7 +9,8 @@
 	  "html": false
 	},
 	"editorScript": "file:./index.js",
-	"save": "file:./save.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
 	"renderCallback": "tasks_shortcode"
   }
   

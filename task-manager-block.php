@@ -38,7 +38,7 @@ function enqueue_sortable_scripts() {
         wp_localize_script('tasks-sortable', 'ajaxObject', array('ajaxUrl' => admin_url('admin-ajax.php')));
     }
 
-    // wp_enqueue_style('manager-style', plugin_dir_url(__FILE__) . 'css/manager-style.css'); // Added this line to enqueue the CSS file
+    wp_enqueue_style('manager-style', plugin_dir_url(__FILE__) . 'css/manager-style.css'); // Added this line to enqueue the CSS file
 
 }
 add_action('wp_enqueue_scripts', 'enqueue_sortable_scripts');

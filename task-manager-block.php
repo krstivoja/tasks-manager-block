@@ -18,10 +18,15 @@ include 'inc/ajax_update.php';
 include 'inc/tasks_shortcode.php';
 
 // Register Block
-// function create_block_task_manager_block_block_init() {
-// 	register_block_type( __DIR__ . '/build' );
-// }
-// add_action( 'init', 'create_block_task_manager_block_block_init' );
+function create_block_task_manager_block_block_init() {
+	register_block_type( 
+        __DIR__ . '/build',
+        array(
+            'render_callback' => 'tasks_shortcode',
+        )
+    );
+}
+add_action( 'init', 'create_block_task_manager_block_block_init' );
 
 
 
@@ -29,31 +34,31 @@ include 'inc/tasks_shortcode.php';
 // Old Block
 // **************************************************
 
-function enqueue_tasks_manager_block() {
-    wp_enqueue_script(
-        'tasks-manager-block',
-        plugin_dir_url(__FILE__) . 'src/tasks-manager-block.js',
-        array('wp-blocks', 'wp-editor', 'wp-components', 'wp-i18n'),
-        '1.0.0',
-        true
-    );
+// function enqueue_tasks_manager_block() {
+//     wp_enqueue_script(
+//         'tasks-manager-block',
+//         plugin_dir_url(__FILE__) . 'src/tasks-manager-block.js',
+//         array('wp-blocks', 'wp-editor', 'wp-components', 'wp-i18n'),
+//         '1.0.0',
+//         true
+//     );
     
-    // Enqueue the editor CSS file
-    wp_enqueue_style(
-        'tasks-manager-editor-css',
-        plugin_dir_url(__FILE__) . 'css/manager-style.css',
-        array('wp-edit-blocks'),
-        '1.0.0'
-    );
-}
-add_action('enqueue_block_editor_assets', 'enqueue_tasks_manager_block');
+//     // Enqueue the editor CSS file
+//     wp_enqueue_style(
+//         'tasks-manager-editor-css',
+//         plugin_dir_url(__FILE__) . 'css/manager-style.css',
+//         array('wp-edit-blocks'),
+//         '1.0.0'
+//     );
+// }
+// add_action('enqueue_block_editor_assets', 'enqueue_tasks_manager_block');
 
-function tasks_manager_block_init() {
-    register_block_type('tasks-manager/tasks-progress', array(
-        'render_callback' => 'tasks_shortcode',
-    ));
-}
-add_action('init', 'tasks_manager_block_init');
+// function tasks_manager_block_init() {
+//     register_block_type('tasks-manager/tasks-progress', array(
+//         'render_callback' => 'tasks_shortcode',
+//     ));
+// }
+// add_action('init', 'tasks_manager_block_init');
 
 
 

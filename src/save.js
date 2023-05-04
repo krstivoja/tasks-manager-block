@@ -1,9 +1,4 @@
-import { useBlockProps } from '@wordpress/block-editor';
-
-export default function save() {
-	return (
-		<p { ...useBlockProps.save() }>
-			{ 'Task Manager Block – hello from the saved content!' }
-		</p>
-	);
+export default function Save() {
+  // Since this is a dynamic block, the save function returns null.
+  return null;
 }

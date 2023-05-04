@@ -1,18 +1,16 @@
+import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import './style.scss';
+import { ServerSideRender } from '@wordpress/editor';
+import { createElement } from '@wordpress/element';
 import Edit from './edit';
-import save from './save';
-import metadata from './block.json';
 
-
-registerBlockType( metadata.name, {
-	/**
-	 * @see ./edit.js
-	 */
-	edit: Edit,
-
-	/**
-	 * @see ./save.js
-	 */
-	save,
-} );
+registerBlockType('tasks-manager/tasks-progress', {
+  title: __('Tasks Progress'),
+  icon: 'list-view',
+  category: 'common',
+  edit: Edit,
+  save: () => {
+    // Since this is a dynamic block, the save function returns null.
+    return null;
+  },
+});

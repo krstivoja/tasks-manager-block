@@ -2,8 +2,8 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
 	"name": "tasks-manager/tasks-progress",
-	"title": "Tasks Progress",
-	"icon": "list-view",
+	"title": "Tasks Manager Block",
+	"icon": "calendar",
 	"category": "common",
 	"attributes": {},
 	"supports": {

@@ -7,8 +7,8 @@ import Edit from './edit';
 import './style.scss';
 
 registerBlockType('tasks-manager/tasks-progress', {
-  title: __('Tasks Progress'),
-  icon: 'list-view',
+  title: __('Tasks Manager Block'),
+  icon: 'calendar',
   category: 'common',
   edit: Edit,
   save: () => {

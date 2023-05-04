@@ -1,4 +1,12 @@
-import { Panel, PanelBody, PanelRow } from '@wordpress/components';
+import { 
+  Panel, 
+  PanelBody, 
+  PanelRow, 
+  ColorPalette, 
+  RangeControl, 
+  ToggleControl 
+} from '@wordpress/components';
+
 import { InspectorControls } from '@wordpress/block-editor';
 
 import { __ } from '@wordpress/i18n';

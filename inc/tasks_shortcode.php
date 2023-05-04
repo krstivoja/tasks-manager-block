@@ -33,7 +33,7 @@ function tasks_shortcode($atts) {
                         <?php while ($tasks->have_posts()) : $tasks->the_post(); ?>
                             <div class="task-item" data-id="<?php echo get_the_ID(); ?>">
                                 <span class="task-title"><?php echo get_the_title(); ?></span>
-                                <button class="read-more" data-id="<?php echo get_the_ID(); ?>">Read More</button>
+                                <button class="read-more wp-element-button" data-id="<?php echo get_the_ID(); ?>">Read More</button>
                                 <dialog class="task-content" id="task-content-<?php echo get_the_ID(); ?>">
                                     <div class="wrap">
                                         <h1><?php echo get_the_title(); ?></h1>

@@ -3,6 +3,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { ServerSideRender } from '@wordpress/editor';
 import { createElement } from '@wordpress/element';
 import Edit from './edit';
+import Save from './save';
 
 import './style.scss';
 
@@ -11,8 +12,5 @@ registerBlockType('tasks-manager/tasks-progress', {
   icon: 'calendar',
   category: 'common',
   edit: Edit,
-  save: () => {
-    // Since this is a dynamic block, the save function returns null.
-    return null;
-  },
+  save: Save
 });

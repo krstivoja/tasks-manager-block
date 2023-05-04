@@ -33,8 +33,8 @@ export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
 			{ __(
-				'Tasks Manager Block – hello from the editor!',
-				'tasks-manager-block'
+				'Task Manager Block – hello from the editor!',
+				'task-manager-block'
 			) }
 		</p>
 	);

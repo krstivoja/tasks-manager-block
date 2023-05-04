@@ -18,7 +18,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 export default function save() {
 	return (
 		<p { ...useBlockProps.save() }>
-			{ 'Tasks Manager Block – hello from the saved content!' }
+			{ 'Task Manager Block – hello from the saved content!' }
 		</p>
 	);
 }

@@ -28,40 +28,6 @@ function create_block_task_manager_block_block_init() {
 }
 add_action( 'init', 'create_block_task_manager_block_block_init' );
 
-
-
-// **************************************************
-// Old Block
-// **************************************************
-
-// function enqueue_tasks_manager_block() {
-//     wp_enqueue_script(
-//         'tasks-manager-block',
-//         plugin_dir_url(__FILE__) . 'src/tasks-manager-block.js',
-//         array('wp-blocks', 'wp-editor', 'wp-components', 'wp-i18n'),
-//         '1.0.0',
-//         true
-//     );
-    
-//     // Enqueue the editor CSS file
-//     wp_enqueue_style(
-//         'tasks-manager-editor-css',
-//         plugin_dir_url(__FILE__) . 'css/manager-style.css',
-//         array('wp-edit-blocks'),
-//         '1.0.0'
-//     );
-// }
-// add_action('enqueue_block_editor_assets', 'enqueue_tasks_manager_block');
-
-// function tasks_manager_block_init() {
-//     register_block_type('tasks-manager/tasks-progress', array(
-//         'render_callback' => 'tasks_shortcode',
-//     ));
-// }
-// add_action('init', 'tasks_manager_block_init');
-
-
-
 // **************************************************
 // Load scripts
 // **************************************************
@@ -72,7 +38,7 @@ function enqueue_sortable_scripts() {
         wp_localize_script('tasks-sortable', 'ajaxObject', array('ajaxUrl' => admin_url('admin-ajax.php')));
     }
 
-    wp_enqueue_style('manager-style', plugin_dir_url(__FILE__) . 'css/manager-style.css'); // Added this line to enqueue the CSS file
+    // wp_enqueue_style('manager-style', plugin_dir_url(__FILE__) . 'css/manager-style.css'); // Added this line to enqueue the CSS file
 
 }
 add_action('wp_enqueue_scripts', 'enqueue_sortable_scripts');

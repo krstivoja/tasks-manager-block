@@ -16,5 +16,11 @@
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^26.3.0"
-	}
+	},
+	"files": [
+		"build",
+		"inc",
+		"task-manager-block.php",
+		"readme.txt"
+	  ]
 }

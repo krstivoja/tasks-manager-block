@@ -11,18 +11,14 @@ function tasks_shortcode($atts) {
         $atts,
         'tasks_progress'
     );
-
     $align_class = $atts['align'] ? 'align' . $atts['align'] : '';
-
     ob_start();
     $terms = get_terms(array('taxonomy' => 'progress', 'hide_empty' => false));
     ?>
-
     <div class="tasks-shortcode <?php echo esc_attr($align_class); ?>" style="background-color: <?php echo esc_attr($atts['backgroundColor']); ?>;">
         <?php foreach ($terms as $term) : ?>
             <div class="tasks-group-wrap">
                 <h3><?php echo $term->name; ?></h3>
-
                 <?php
                 $task_args = array(
                     'post_type' => 'tasks',
@@ -37,12 +33,9 @@ function tasks_shortcode($atts) {
                         )
                     )
                 );
-
                 $tasks = new WP_Query($task_args);
                 ?>
-
                 <div class="tasks-list" id="<?php echo $term->slug; ?>" data-term-id="<?php echo $term->term_id; ?>" style="background-color: <?php echo esc_attr($atts['tasksListBackgroundColor']); ?>">
-
                     <?php if ($tasks->have_posts()) : ?>
                         <?php while ($tasks->have_posts()) : $tasks->the_post(); ?>
                             <div class="task-item" data-id="<?php echo get_the_ID(); ?>" style="background-color: <?php echo esc_attr($atts['cardBackgroundColor']); ?>">
@@ -73,12 +66,3 @@ function tasks_shortcode($atts) {
     return ob_get_clean();
 }
 add_shortcode('tasks_progress', 'tasks_shortcode');
-
-
-
-
-
-
-
-
-

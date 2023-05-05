@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, useSetting } from '@wordpress/block-editor';
-import { PanelBody, ColorPalette } from '@wordpress/components';
+import { TabPanel, PanelBody, ColorPalette } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 
 const Edit = (props) => {
@@ -19,31 +19,58 @@ const Edit = (props) => {
         setAttributes({ cardBackgroundColor: value });
     };
 
+    
+    const pattletes = {
+        tab1: <ColorPalette
+            value={backgroundColor}
+            colors={[...useSetting('color.palette')]}
+            onChange={setBackgroundColor}
+        />,
+
+        tab2: <ColorPalette
+            value={tasksListBackgroundColor}
+            colors={[...useSetting('color.palette')]}
+            onChange={setTasksListBackgroundColor}
+        />,
+        tab3: <ColorPalette
+            value={cardBackgroundColor}
+            colors={[...useSetting('color.palette')]}
+            onChange={setCardBackgroundColor}
+        />
+    }
+
+    const onSelect = ( tabName ) => {
+        console.log( 'Selecting tab', tabName );
+    };
+
     return (
         <div {...useBlockProps()}>
             
             <InspectorControls>
-                <PanelBody title={__('Background Color', 'tasks-manager')} >
-                    <ColorPalette
-                        value={backgroundColor}
-                        colors={[...useSetting('color.palette')]}
-                        onChange={setBackgroundColor}
-                    />
-                </PanelBody>
-                <PanelBody title={__('Lists Background Color', 'tasks-manager')} >
-                    <ColorPalette
-                        value={tasksListBackgroundColor}
-                        colors={[...useSetting('color.palette')]}
-                        onChange={setTasksListBackgroundColor}
-                    />
-                </PanelBody>
-                <PanelBody title={__('Cards Background Color', 'tasks-manager')} >
-                    <ColorPalette
-                        value={cardBackgroundColor}
-                        colors={[...useSetting('color.palette')]}
-                        onChange={setCardBackgroundColor}
-                    />
-                </PanelBody>
+                <TabPanel
+                    className="my-tab-panel"
+                    activeClass="active-tab"
+                    onSelect={ onSelect }
+                    tabs={ [
+                        {
+                            name: 'tab1',
+                            title: __('Background', 'tasks-manager'),
+                            className: 'tab-one',
+                        },
+                        {
+                            name: 'tab2',
+                            title: __('Lists Background Color', 'tasks-manager'),
+                            className: 'tab-two',
+                        },
+                        {
+                            name: 'tab3',
+                            title: __('Cards Background Color', 'tasks-manager'),
+                            className: 'tab-three',
+                        },
+                    ] }
+                >
+                    { ( tab ) => pattletes[tab.name] }
+                </TabPanel>
             </InspectorControls>
 
             <ServerSideRender block="tasks-manager/tasks-progress" attributes={attributes} />

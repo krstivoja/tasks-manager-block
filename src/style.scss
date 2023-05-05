@@ -1,1 +1,5 @@
 @import 'editor.scss';
+
+.tasks-shortcode.alignwide{
+    max-width: var(--wp--style--global--wide-size) !important;
+}

@@ -1,11 +1,22 @@
 <?php
 
 function tasks_shortcode($atts) {
+    $atts = shortcode_atts(
+        array(
+            'backgroundColor' => '',
+            'align' => '',
+        ),
+        $atts,
+        'tasks_progress'
+    );
+
+    $align_class = $atts['align'] ? 'align' . $atts['align'] : '';
+
     ob_start();
     $terms = get_terms(array('taxonomy' => 'progress', 'hide_empty' => false));
     ?>
 
-    <div class="tasks-shortcode">
+    <div class="tasks-shortcode <?php echo esc_attr($align_class); ?>" style="background-color: <?php echo esc_attr($atts['backgroundColor']); ?>;">
         <?php foreach ($terms as $term) : ?>
             <div class="tasks-group-wrap">
                 <h3><?php echo $term->name; ?></h3>

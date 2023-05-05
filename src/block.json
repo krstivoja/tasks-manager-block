@@ -5,7 +5,12 @@
 	"title": "Tasks Manager Block",
 	"icon": "calendar",
 	"category": "common",
-	"attributes": {},
+	"attributes": {
+		"backgroundColor": {
+		  "type": "string",
+		  "default": ""
+		}
+	},
 	"supports": {
 		"align": [ "wide", "full" ],
 		"anchor": true,

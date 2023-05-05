@@ -13,6 +13,10 @@
 		"tasksListBackgroundColor": {
 			"type": "string",
 			"default": ""
+		},
+		"cardBackgroundColor": {
+			"type": "string",
+			"default": ""
 		}
 	},	
 	"supports": {

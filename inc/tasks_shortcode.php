@@ -5,6 +5,7 @@ function tasks_shortcode($atts) {
         array(
             'backgroundColor' => '',
             'tasksListBackgroundColor' => '',
+            'cardBackgroundColor' => '',
             'align' => '',
         ),
         $atts,
@@ -44,7 +45,7 @@ function tasks_shortcode($atts) {
 
                     <?php if ($tasks->have_posts()) : ?>
                         <?php while ($tasks->have_posts()) : $tasks->the_post(); ?>
-                            <div class="task-item" data-id="<?php echo get_the_ID(); ?>">
+                            <div class="task-item" data-id="<?php echo get_the_ID(); ?>" style="background-color: <?php echo esc_attr($atts['cardBackgroundColor']); ?>">
                                 <span class="task-title"><?php echo get_the_title(); ?></span>
                                 <button class="read-more wp-element-button" data-id="<?php echo get_the_ID(); ?>">Read More</button>
                                 <dialog class="task-content" id="task-content-<?php echo get_the_ID(); ?>">

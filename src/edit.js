@@ -5,10 +5,14 @@ import ServerSideRender from '@wordpress/server-side-render';
 
 const Edit = (props) => {
     const { attributes, setAttributes } = props;
-    const { backgroundColor } = attributes;
+    const { backgroundColor, tasksListBackgroundColor } = attributes;
 
     const setBackgroundColor = (value) => {
         setAttributes({ backgroundColor: value });
+    };
+
+    const setTasksListBackgroundColor = (value) => {
+        setAttributes({ tasksListBackgroundColor: value });
     };
 
     return (
@@ -19,6 +23,13 @@ const Edit = (props) => {
                         value={backgroundColor}
                         colors={[...useSetting('color.palette')]}
                         onChange={setBackgroundColor}
+                    />
+                </PanelBody>
+                <PanelBody title={__('Tasks List Color', 'tasks-manager')} >
+                    <ColorPalette
+                        value={tasksListBackgroundColor}
+                        colors={[...useSetting('color.palette')]}
+                        onChange={setTasksListBackgroundColor}
                     />
                 </PanelBody>
             </InspectorControls>

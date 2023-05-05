@@ -7,10 +7,14 @@
 	"category": "common",
 	"attributes": {
 		"backgroundColor": {
-		  "type": "string",
-		  "default": ""
+			"type": "string",
+			"default": ""
+		},
+		"tasksListBackgroundColor": {
+			"type": "string",
+			"default": ""
 		}
-	},
+	},	
 	"supports": {
 		"align": [ "wide", "full" ],
 		"anchor": true,

@@ -4,6 +4,7 @@ function tasks_shortcode($atts) {
     $atts = shortcode_atts(
         array(
             'backgroundColor' => '',
+            'tasksListBackgroundColor' => '',
             'align' => '',
         ),
         $atts,
@@ -39,7 +40,8 @@ function tasks_shortcode($atts) {
                 $tasks = new WP_Query($task_args);
                 ?>
 
-                <div class="tasks-list" id="<?php echo $term->slug; ?>" data-term-id="<?php echo $term->term_id; ?>">
+                <div class="tasks-list" id="<?php echo $term->slug; ?>" data-term-id="<?php echo $term->term_id; ?>" style="background-color: <?php echo esc_attr($atts['tasksListBackgroundColor']); ?>">
+
                     <?php if ($tasks->have_posts()) : ?>
                         <?php while ($tasks->have_posts()) : $tasks->the_post(); ?>
                             <div class="task-item" data-id="<?php echo get_the_ID(); ?>">

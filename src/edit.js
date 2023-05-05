@@ -21,22 +21,34 @@ const Edit = (props) => {
 
     
     const pattletes = {
-        tab1: <ColorPalette
-            value={backgroundColor}
-            colors={[...useSetting('color.palette')]}
-            onChange={setBackgroundColor}
-        />,
+        tab1: 
+            <PanelBody title={__('Background', 'tasks-manager')} >
+                <ColorPalette
+                    value={backgroundColor}
+                    colors={[...useSetting('color.palette')]}
+                    onChange={setBackgroundColor}
+                />
+            </PanelBody>     
+        ,
 
-        tab2: <ColorPalette
+        tab2: 
+        <PanelBody title={__('Background', 'tasks-manager')} >
+        <ColorPalette
             value={tasksListBackgroundColor}
             colors={[...useSetting('color.palette')]}
             onChange={setTasksListBackgroundColor}
-        />,
-        tab3: <ColorPalette
+        />
+        </PanelBody>
+        ,
+
+        tab3: 
+        <PanelBody title={__('Background', 'tasks-manager')} >
+        <ColorPalette
             value={cardBackgroundColor}
             colors={[...useSetting('color.palette')]}
             onChange={setCardBackgroundColor}
         />
+        </PanelBody>        
     }
 
     const onSelect = ( tabName ) => {
@@ -49,22 +61,22 @@ const Edit = (props) => {
             <InspectorControls>
                 <TabPanel
                     className="my-tab-panel"
-                    activeClass="active-tab"
+                    activeClass="is-active"
                     onSelect={ onSelect }
                     tabs={ [
                         {
                             name: 'tab1',
-                            title: __('Background', 'tasks-manager'),
+                            title: __('Wrapper', 'tasks-manager'),
                             className: 'tab-one',
                         },
                         {
                             name: 'tab2',
-                            title: __('Lists Background Color', 'tasks-manager'),
+                            title: __('Lists', 'tasks-manager'),
                             className: 'tab-two',
                         },
                         {
                             name: 'tab3',
-                            title: __('Cards Background Color', 'tasks-manager'),
+                            title: __('Cards', 'tasks-manager'),
                             className: 'tab-three',
                         },
                     ] }

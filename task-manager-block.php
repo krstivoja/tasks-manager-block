@@ -19,7 +19,7 @@ include 'inc/ajax_update.php';
 
 // Register Block
 function create_block_task_manager_block_block_init() {
-    wp_enqueue_script('tasks-shortcode', plugin_dir_url(__FILE__).'inc/Taskprogress.js', array(), bull, true);
+    wp_enqueue_script('tasks-shortcode', plugin_dir_url(__FILE__).'inc/Taskprogress.js', array(), null, true);
 	register_block_type( 
         __DIR__ . '/build',
         array(

@@ -20,6 +20,7 @@ const Edit = (props) => {
     };
 
     
+    
     const pattletes = {
         tab1: 
             <PanelBody title={__('Background', 'tasks-manager')} >

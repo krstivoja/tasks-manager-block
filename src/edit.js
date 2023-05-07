@@ -1,7 +1,9 @@
+import './editor.scss';
+
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, useSetting } from '@wordpress/block-editor';
 import { TabPanel, PanelBody, ColorPalette } from '@wordpress/components';
-import ServerSideRender from '@wordpress/server-side-render';
+import TaskList from './tasksList.js';
 
 const Edit = (props) => {
     const { attributes, setAttributes } = props;
@@ -19,8 +21,6 @@ const Edit = (props) => {
         setAttributes({ cardBackgroundColor: value });
     };
 
-    
-    
     const pattletes = {
         tab1: 
             <PanelBody title={__('Background', 'tasks-manager')} >
@@ -86,7 +86,15 @@ const Edit = (props) => {
                 </TabPanel>
             </InspectorControls>
 
-            <ServerSideRender block="tasks-manager/tasks-progress" attributes={attributes} />
+            <TaskList 
+                block="tasks-manager/tasks-progress" 
+                attributes={attributes} 
+                backgroundColor={attributes.backgroundColor} 
+                tasksListBackgroundColor={attributes.tasksListBackgroundColor} 
+                cardBackgroundColor={attributes.cardBackgroundColor} 
+            />
+
+
         </div>
     );
 };

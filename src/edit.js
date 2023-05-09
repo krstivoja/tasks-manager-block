@@ -2,7 +2,7 @@ import './editor.scss';
 
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, useSetting } from '@wordpress/block-editor';
-import { TabPanel, PanelBody, ColorPalette, __experimentalUnitControl as UnitControl, Button, __experimentalBoxControl as BoxControl } from '@wordpress/components';
+import { TabPanel, PanelBody, RangeControl, ColorPalette, __experimentalUnitControl as UnitControl, Button, __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import TaskList from './tasksList.js';
 
 const Edit = (props) => {

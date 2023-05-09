@@ -7,18 +7,33 @@ function tasks_shortcode($atts) {
             'tasksListBackgroundColor' => '',
             'cardBackgroundColor' => '',
             'align' => '',
+			'paddingSize' => '',
+			'gapSize' => '',
+			'spaddingSize' => '',
+			'sgapSize' => '',
         ),
         $atts,
         'tasks_progress'
     );
 
     $align_class = $atts['align'] ? 'align' . $atts['align'] : '';
-
+	$block_gap = $atts['gapSize'] ? $atts['gapSize'] : '';
+	$padding_top = $atts['paddingSize']['top'] ? $atts['paddingSize']['top'] : '';
+	$padding_right = $atts['paddingSize']['right'] ? $atts['paddingSize']['right'] : '';
+	$padding_bottom = $atts['paddingSize']['bottom'] ? $atts['paddingSize']['bottom'] : '';
+	$padding_left = $atts['paddingSize']['left'] ? $atts['paddingSize']['left'] : '';
+	$sblock_gap = $atts['sgapSize'] ? $atts['sgapSize'] : '';
+	$spadding_top = $atts['spaddingSize']['top'] ? $atts['spaddingSize']['top'] : '';
+	$spadding_right = $atts['spaddingSize']['right'] ? $atts['spaddingSize']['right'] : '';
+	$spadding_bottom = $atts['spaddingSize']['bottom'] ? $atts['spaddingSize']['bottom'] : '';
+	$spadding_left = $atts['spaddingSize']['left'] ? $atts['spaddingSize']['left'] : '';
+	
     ob_start();
     $terms = get_terms(array('taxonomy' => 'progress', 'hide_empty' => false));
+	
     ?>
 
-    <div class="tasks-shortcode <?php echo esc_attr($align_class); ?>" style="background-color: <?php echo esc_attr($atts['backgroundColor']); ?>;">
+    <div class="tasks-shortcode <?php echo esc_attr($align_class); ?>" style="gap:<?php echo $block_gap?>;padding-top:<?php echo $padding_top?>;padding-right:<?php echo $padding_right?>;padding-bottom:<?php echo $padding_bottom?>;padding-left:<?php echo $padding_left?>;background-color: <?php echo esc_attr($atts['backgroundColor']); ?>;">
         <?php foreach ($terms as $term) : ?>
             <div class="tasks-group-wrap">
                 <h3><?php echo $term->name; ?></h3>
@@ -41,7 +56,7 @@ function tasks_shortcode($atts) {
                 $tasks = new WP_Query($task_args);
                 ?>
 
-                <div class="tasks-list" id="<?php echo $term->slug; ?>" data-term-id="<?php echo $term->term_id; ?>" style="background-color: <?php echo esc_attr($atts['tasksListBackgroundColor']); ?>">
+                <div class="tasks-list" id="<?php echo $term->slug; ?>" data-term-id="<?php echo $term->term_id; ?>" style="gap:<?php echo $sblock_gap?>;padding-top:<?php echo $spadding_top?>;padding-right:<?php echo $spadding_right?>;padding-bottom:<?php echo $spadding_bottom?>;padding-left:<?php echo $spadding_left?>;background-color: <?php echo esc_attr($atts['tasksListBackgroundColor']); ?>">
 
                     <?php if ($tasks->have_posts()) : ?>
                         <?php while ($tasks->have_posts()) : $tasks->the_post(); ?>

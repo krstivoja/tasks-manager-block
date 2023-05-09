@@ -68,5 +68,98 @@
 	  gap: 20px;
 	}
   }
-  
-  
+
+.wp-block-tasks-manager-tasks-progress {
+    padding: 0 !important;
+}
+
+.gap-text {
+    display: none;
+}
+
+.gap .gap-line {
+    display: none;
+}
+
+.gap .gap-text {
+    display: block;
+}
+
+button.components-button.gap-button {
+    border: none !important;
+    width: 25px;
+    height: 25px;
+    box-shadow: none !important;
+    padding: 0;
+    cursor: pointer;
+    text-align: end;
+    width: 100%;
+    justify-content: end;
+    margin-bottom: -16px;
+    display: block;
+    z-index: 999 !important;
+    position: relative;
+    background: #ffffff00 !important;
+}
+
+span.components-range-control__mark {
+    top: 9px;
+    background: white !important;
+    z-index: 9;
+    width: 2px;
+}
+
+.padding-button.is-secondary {
+    border: none !important;
+    width: 25px;
+    height: 25px;
+    box-shadow: none !important;
+    padding: 0;
+    cursor: pointer;
+    text-align: end;
+    width: 100%;
+    justify-content: end;
+    margin-bottom: -16px;
+    display: block;
+    z-index: 999 !important;
+    position: relative;
+    background: #ffffff00 !important;
+}
+
+.components-panel__body div[role="group"] {
+    display: none;
+}
+
+.padding-top,
+.padding-bottom,
+.padding-left,
+.padding-right {
+    display: none;
+}
+
+.padding-diff .padding-all {
+    display: none;
+}
+
+.padding-diff div[role="group"] {
+    display: block;
+}
+
+.padding-full .padding-top,
+.padding-full .padding-bottom,
+.padding-full .padding-left,
+.padding-full .padding-right {
+    display: block;
+}
+
+.padding-diff:not(.padding-full) div[role=group]] {
+    display: block;
+}
+
+.padding-full .padding-all {
+    display: none;
+}
+
+span.components-range-control__thumb-wrapper {
+    z-index: 9;
+}

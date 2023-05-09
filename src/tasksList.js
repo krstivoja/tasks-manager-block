@@ -41,12 +41,12 @@ class TaskList extends Component {
     const { backgroundColor } = this.props;
   
     return (
-      <div className='tasks-shortcode' style={{ backgroundColor }}>
+        <div className='tasks-shortcode' style={{ backgroundColor, gap: this.props.gapSize, paddingTop: this.props.paddingSize["top"], paddingLeft: this.props.paddingSize["left"], paddingRight: this.props.paddingSize["right"], paddingBottom: this.props.paddingSize["bottom"] }}>
       {terms.map(term => (
         <div key={term.id} className='tasks-group-wrap'>
           <h3>{term.name}</h3>
           {tasksByGroup[term.id] && tasksByGroup[term.id].length > 0 ? (
-            <div className='tasks-list' style={{ backgroundColor: this.props.tasksListBackgroundColor }}>
+                  <div className='tasks-list' style={{ backgroundColor: this.props.tasksListBackgroundColor, gap: this.props.sgapSize, paddingTop: this.props.spaddingSize["top"], paddingLeft: this.props.spaddingSize["left"], paddingRight: this.props.spaddingSize["right"], paddingBottom: this.props.spaddingSize["bottom"] }}>
               {tasksByGroup[term.id].map(task => (
                 <div key={task.id} className='task-item' style={{ backgroundColor: this.props.cardBackgroundColor }}>
                   <span className="task-title">{task.title.rendered}</span>

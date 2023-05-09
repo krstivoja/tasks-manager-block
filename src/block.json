@@ -1,31 +1,51 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 2,
-	"name": "tasks-manager/tasks-progress",
-	"title": "Tasks Manager Block",
-	"icon": "calendar",
-	"category": "common",
-	"attributes": {
-		"backgroundColor": {
-			"type": "string",
-			"default": ""
-		},
-		"tasksListBackgroundColor": {
-			"type": "string",
-			"default": ""
-		},
-		"cardBackgroundColor": {
-			"type": "string",
-			"default": ""
-		}
-	},	
-	"supports": {
-		"align": [ "wide", "full" ],
-		"anchor": true,
-		"html": true
-	},
-	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "tasks-manager/tasks-progress",
+    "title": "Tasks Manager Block",
+    "icon": "calendar",
+    "category": "layout",
+    "attributes": {
+        "backgroundColor": {
+            "type": "string",
+            "default": ""
+        },
+        "tasksListBackgroundColor": {
+            "type": "string",
+            "default": ""
+        },
+        "cardBackgroundColor": {
+            "type": "string",
+            "default": ""
+        },
+        "paddingSize": {
+            "type": "object",
+            "default": ""
+        },
+        "spaddingSize": {
+            "type": "object",
+            "default": ""
+        },
+        "gapSize": {
+            "type": "string",
+            "default": ""
+        },
+
+        "sgapSize": {
+            "type": "string",
+            "default": ""
+        }
+
+    },
+    "supports": {
+        "align": [
+            "wide",
+            "full"
+        ],
+        "anchor": true,
+        "html": true
+    },
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css"
 }
-  

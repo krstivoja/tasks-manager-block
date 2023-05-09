@@ -6,8 +6,10 @@ import { TabPanel, PanelBody, RangeControl, ColorPalette, __experimentalUnitCont
 import TaskList from './tasksList.js';
 
 const Edit = (props) => {
-    const marks = [...useSetting('spacing.spacingSizes')].map(s => ({ value: s.slug }));
-    const max = marks.length;
+    const bacis = [...useSetting('spacing.spacingSizes')].map(s => ({ value: s.slug }));
+    const additional = [{ "value": 0 }];
+    const marks = additional.concat(bacis);
+    const max = bacis.length;
     const { attributes, setAttributes } = props;
     const { backgroundColor, tasksListBackgroundColor, cardBackgroundColor, paddingSize, gapSize, spaddingSize, sgapSize} = attributes;
 
@@ -89,10 +91,10 @@ const Edit = (props) => {
                     colors={[...useSetting('color.palette')]}
                     onChange={setBackgroundColor}
                 />
-                <Button variant="secondary" label="Set custom size" className="gap-button" icon="settings" onClick={ButtonAction}></Button>
+                <Button variant="secondary" label="Set custom size" className="gap-button" icon="admin-settings" onClick={ButtonAction}></Button>
                 <UnitControl onChange={setgapSize} value={gapSize} label="BLOCK SPACING" className="gap-text" />
                 <RangeControl label="BLOCK SPACING" initialPosition={parseInt(gapSize, 10)} className="gap-line" separatorType="topFullWidth" withInputField="false" max={max} value={gapSize} onChange={(value) => { setAttributes({ gapSize: `${marks[value]["value"]}px` }); }} />
-                <Button variant="secondary" label="Set custom size" className="padding-button" icon="settings" onClick={ButtonTAction}></Button>
+                <Button variant="secondary" label="Set custom size" className="padding-button" icon="admin-settings" onClick={ButtonTAction}></Button>
                 <BoxControl allowReset="false" className="padding-box" label="PADDING" values={paddingSize} onChange={(value) => { setAttributes({ paddingSize: value }); }} />
                 <RangeControl label="PADDING" initialPosition={parseInt(paddingSize["top"], 10)} className="padding-all" separatorType="topFullWidth" withInputField="false" max={max} value={paddingSize} onChange={(value) => { setAttributes({ paddingSize: { top: `${marks[value]["value"]}px`, bottom: `${marks[value]["value"]}px`, left: `${marks[value]["value"]}px`, right: `${marks[value]["value"]}px` } }) }} />
                 <RangeControl label="PADDING TOP" initialPosition={parseInt(paddingSize["top"], 10)}  className="padding-top" separatorType="topFullWidth" withInputField="false" max={max} value={paddingSize["top"]} onChange={(value) => { setAttributes({ paddingSize: { top: `${marks[value]["value"]}px`, bottom: paddingSize["bottom"], left: paddingSize["left"], right: paddingSize["right"] } }); }} />
@@ -110,10 +112,10 @@ const Edit = (props) => {
             colors={[...useSetting('color.palette')]}
             onChange={setTasksListBackgroundColor}
                 />
-                <Button variant="secondary" label="Set custom size" className="gap-button" icon="settings" onClick={ButtonActionT}></Button>
+                <Button variant="secondary" label="Set custom size" className="gap-button" icon="admin-settings" onClick={ButtonActionT}></Button>
                 <UnitControl onChange={setsgapSize} value={sgapSize} label="BLOCK SPACING" className="gap-text" />
                 <RangeControl label="BLOCK SPACING" initialPosition={parseInt(sgapSize, 10)} className="gap-line" separatorType="topFullWidth" withInputField="false" max={max} value={sgapSize} onChange={(value) => { setAttributes({ sgapSize: `${marks[value]["value"]}px` }); }} />
-                <Button variant="secondary" label="Set custom size" className="padding-button" icon="settings" onClick={ButtonTActionT}></Button>
+                <Button variant="secondary" label="Set custom size" className="padding-button" icon="admin-settings" onClick={ButtonTActionT}></Button>
                 <BoxControl allowReset="false" className="padding-box" label="PADDING" values={spaddingSize} onChange={(value) => { setAttributes({ spaddingSize: value }); }} />
                 <RangeControl label="PADDING" initialPosition={parseInt(spaddingSize["top"], 10)} className="padding-all" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize} onChange={(value) => { setAttributes({ spaddingSize: { top: `${marks[value]["value"]}px`, bottom: `${marks[value]["value"]}px`, left: `${marks[value]["value"]}px`, right: `${marks[value]["value"]}px` } }); }} />
                 <RangeControl label="PADDING TOP" initialPosition={parseInt(spaddingSize["top"], 10)} className="padding-top" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize["top"]} onChange={(value) => { setAttributes({ spaddingSize: { top: `${marks[value]["value"]}px`, bottom: spaddingSize["bottom"], left: spaddingSize["left"], right: spaddingSize["right"] } }); }} />

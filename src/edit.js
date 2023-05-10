@@ -4,6 +4,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, useSetting } from '@wordpress/block-editor';
 import { TabPanel, PanelBody, RangeControl, ColorPalette, __experimentalUnitControl as UnitControl, Button, __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import TaskList from './tasksList.js';
+import GapControl from './components/GapControl.js';
 
 const Edit = (props) => {
     const bacis = [...useSetting('spacing.spacingSizes')].map(s => ({ value: s.slug }));
@@ -91,9 +92,8 @@ const Edit = (props) => {
                     colors={[...useSetting('color.palette')]}
                     onChange={setBackgroundColor}
                 />
-                <Button variant="secondary" label="Set custom size" className="gap-button" icon="admin-settings" onClick={ButtonAction}></Button>
-                <UnitControl onChange={setgapSize} value={gapSize} label="BLOCK SPACING" className="gap-text" />
-                <RangeControl label="BLOCK SPACING" initialPosition={marks.findIndex(p => p.value == parseInt(gapSize, 10))} className="gap-line" separatorType="topFullWidth" withInputField="false" max={max} value={gapSize} onChange={(value) => { setAttributes({ gapSize: `${marks[value]["value"]}px` }); }} />
+                <GapControl value={gapSize} onChange={setgapSize} />
+                
                 <Button variant="secondary" label="Set custom size" className="padding-button" icon="admin-settings" onClick={ButtonTAction}></Button>
                 <BoxControl allowReset="false" className="padding-box" label="PADDING" values={paddingSize} onChange={(value) => { setAttributes({ paddingSize: value }); }} />
                 <RangeControl label="PADDING" initialPosition={marks.findIndex(p => p.value == parseInt(paddingSize["top"], 10))} className="padding-all" separatorType="topFullWidth" withInputField="false" max={max} value={paddingSize} onChange={(value) => { setAttributes({ paddingSize: { top: `${marks[value]["value"]}px`, bottom: `${marks[value]["value"]}px`, left: `${marks[value]["value"]}px`, right: `${marks[value]["value"]}px` } }) }} />

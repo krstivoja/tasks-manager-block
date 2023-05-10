@@ -15,7 +15,7 @@
 
 include 'inc/register.php';
 include 'inc/ajax_update.php';
-// include 'inc/tasks_shortcode.php';
+include 'inc/tasks_shortcode.php';
 
 // Register Block
 function create_block_task_manager_block_block_init() {

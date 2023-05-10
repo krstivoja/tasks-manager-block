@@ -16,17 +16,32 @@ function tasks_shortcode($atts) {
         'tasks_progress'
     );
 
+    
     $align_class = $atts['align'] ? 'align' . $atts['align'] : '';
 	$block_gap = $atts['gapSize'] ? $atts['gapSize'] : '';
-	$padding_top = $atts['paddingSize']['top'] ? $atts['paddingSize']['top'] : '';
-	$padding_right = $atts['paddingSize']['right'] ? $atts['paddingSize']['right'] : '';
-	$padding_bottom = $atts['paddingSize']['bottom'] ? $atts['paddingSize']['bottom'] : '';
-	$padding_left = $atts['paddingSize']['left'] ? $atts['paddingSize']['left'] : '';
 	$sblock_gap = $atts['sgapSize'] ? $atts['sgapSize'] : '';
-	$spadding_top = $atts['spaddingSize']['top'] ? $atts['spaddingSize']['top'] : '';
-	$spadding_right = $atts['spaddingSize']['right'] ? $atts['spaddingSize']['right'] : '';
-	$spadding_bottom = $atts['spaddingSize']['bottom'] ? $atts['spaddingSize']['bottom'] : '';
-	$spadding_left = $atts['spaddingSize']['left'] ? $atts['spaddingSize']['left'] : '';
+	if ($atts['paddingSize']){
+		$padding_top = $atts['paddingSize']['top'];
+		$padding_right = $atts['paddingSize']['right'];
+		$padding_bottom = $atts['paddingSize']['bottom'];
+		$padding_left = $atts['paddingSize']['left'];
+	} else {
+		$padding_top = "";
+		$padding_right = "";
+		$padding_bottom = "";
+		$padding_left = "";
+	}
+	if ($atts['spaddingSize']){
+		$spadding_top = $atts['spaddingSize']['top'];
+		$spadding_right = $atts['spaddingSize']['right'];
+		$spadding_bottom = $atts['spaddingSize']['bottom'];
+		$spadding_left = $atts['spaddingSize']['left'];
+	} else {
+		$spadding_top = "";
+		$spadding_right = "";
+		$spadding_bottom = "";
+		$spadding_left = "";
+	}
 	
     ob_start();
     $terms = get_terms(array('taxonomy' => 'progress', 'hide_empty' => false));

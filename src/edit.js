@@ -86,14 +86,10 @@ const Edit = (props) => {
 
     const pattletes = {
         tab1:
-            <PanelBody title={__('Background', 'tasks-manager')} >
-                <ColorPalette
-                    value={backgroundColor}
-                    colors={[...useSetting('color.palette')]}
-                    onChange={setBackgroundColor}
-                />
+            <PanelBody title={__('Background', 'tasks-manager')} >                
+                <ColorPalette value={backgroundColor} colors={[...useSetting('color.palette')]} onChange={setBackgroundColor} />
                 <GapControl value={gapSize} onChange={setgapSize} />
-                
+
                 <Button variant="secondary" label="Set custom size" className="padding-button" icon="admin-settings" onClick={ButtonTAction}></Button>
                 <BoxControl allowReset="false" className="padding-box" label="PADDING" values={paddingSize} onChange={(value) => { setAttributes({ paddingSize: value }); }} />
                 <RangeControl label="PADDING" initialPosition={marks.findIndex(p => p.value == parseInt(paddingSize["top"], 10))} className="padding-all" separatorType="topFullWidth" withInputField="false" max={max} value={paddingSize} onChange={(value) => { setAttributes({ paddingSize: { top: `${marks[value]["value"]}px`, bottom: `${marks[value]["value"]}px`, left: `${marks[value]["value"]}px`, right: `${marks[value]["value"]}px` } }) }} />
@@ -107,14 +103,9 @@ const Edit = (props) => {
 
         tab2: 
         <PanelBody title={__('Background', 'tasks-manager')} >
-        <ColorPalette
-            value={tasksListBackgroundColor}
-            colors={[...useSetting('color.palette')]}
-            onChange={setTasksListBackgroundColor}
-                />
-                <Button variant="secondary" label="Set custom size" className="gap-button" icon="admin-settings" onClick={ButtonActionT}></Button>
-                <UnitControl onChange={setsgapSize} value={sgapSize} label="BLOCK SPACING" className="gap-text" />
-                <RangeControl label="BLOCK SPACING" initialPosition={marks.findIndex(p => p.value == parseInt(sgapSize, 10))} className="gap-line" separatorType="topFullWidth" withInputField="false" max={max} value={sgapSize} onChange={(value) => { setAttributes({ sgapSize: `${marks[value]["value"]}px` }); }} />
+            <ColorPalette value={tasksListBackgroundColor} colors={[...useSetting('color.palette')]} onChange={setTasksListBackgroundColor} />                
+            <GapControl value={sgapSize} onChange={setsgapSize} />
+
                 <Button variant="secondary" label="Set custom size" className="padding-button" icon="admin-settings" onClick={ButtonTActionT}></Button>
                 <BoxControl allowReset="false" className="padding-box" label="PADDING" values={spaddingSize} onChange={(value) => { setAttributes({ spaddingSize: value }); }} />
                 <RangeControl label="PADDING" initialPosition={marks.findIndex(p => p.value == parseInt(spaddingSize["top"], 10))} className="padding-all" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize} onChange={(value) => { setAttributes({ spaddingSize: { top: `${marks[value]["value"]}px`, bottom: `${marks[value]["value"]}px`, left: `${marks[value]["value"]}px`, right: `${marks[value]["value"]}px` } }); }} />

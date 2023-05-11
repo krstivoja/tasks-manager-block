@@ -1,7 +1,3 @@
 node_modules/
 build/
-/.vs/slnx.sqlite
-/.vs/tasks-manager-block/config/applicationhost.config
-/.vs/tasks-manager-block/FileContentIndex/38a2deb2-9b2d-41cf-af90-600da69c5aab.vsidx
-/.vs/tasks-manager-block/FileContentIndex/read.lock
-/.vs/tasks-manager-block/FileContentIndex/37027fc3-e343-4bd2-9ead-d5453ad24362.vsidx
+.vs/

@@ -30,7 +30,6 @@ return (
   <Icon icon={ link } />
 </Button>
 </Flex>
-<h2>Marko</h2>
 
 {showUnitControl ? (
 <UnitControl onChange={onChange} value={value} className="" />
@@ -47,8 +46,6 @@ return (
 )}
 
 <BoxControl allowReset="false" className="" label="PADDING" value={value} onChange={onChange} />
-
-<h2>Marko</h2>
 
 </>
 );

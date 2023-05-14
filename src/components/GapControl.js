@@ -1,16 +1,9 @@
-import {
-  RangeControl,
-  Button,
-  __experimentalUnitControl as UnitControl,
-  __experimentalBoxControl as BoxControl,
-  Icon,
-  Flex,
-  BaseControl,
-} from "@wordpress/components";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { RangeControl, Button, Icon, Flex, BaseControl } from "@wordpress/components";
 import { useSetting } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
 import { settings } from "@wordpress/icons";
-import { useState, useEffect, useMemo } from "@wordpress/element";
+import { __experimentalUnitControl as UnitControl, __experimentalBoxControl as BoxControl } from "@wordpress/components";
 
 // Avoid magic strings
 const RANGE_CONTROL = "RangeControl";
@@ -31,20 +24,21 @@ const GapControl = ({ value, onChange }) => {
   const [isActive, setIsActive] = useState(false);
   const [isUsingRangeControl, setIsUsingRangeControl] = useState(true);
 
-  const handleRangeChange = (newValue) => {
-    setIsUsingRangeControl(true);
-    onChange(`${marks[newValue]["value"]}px`);
-  };
+  const handleRangeChange = useCallback(
+    (newValue) => {
+      setIsUsingRangeControl(true);
+      onChange(`${marks[newValue]["value"]}px`);
+    },
+    [onChange, marks]
+  );
 
-  const handleBoxChange = (newValue) => {
-    setIsUsingRangeControl(false);
-    onChange(newValue);
-  };
-
-  const toggleUnitControl = () => {
-    setShowUnitControl(!showUnitControl);
-    setIsActive(!isActive);
-  };
+  const handleBoxChange = useCallback(
+    (newValue) => {
+      setIsUsingRangeControl(false);
+      onChange(newValue);
+    },
+    [onChange]
+  );
 
   useEffect(() => {
     try {
@@ -82,41 +76,38 @@ const GapControl = ({ value, onChange }) => {
             className={`components-button is-small has-icon ${
               isActive ? "is-pressed" : ""
             }`}
-            onClick={toggleUnitControl}
+            onClick={() => {
+              setShowUnitControl(!showUnitControl);
+              setIsActive(!isActive);
+            }}
           >
             <Icon icon={settings} />
           </Button>
         </Flex>
       </BaseControl>
 
-      {!showUnitControl && (
-        <>
-          {isUsingRangeControl ? (
-            <RangeControl
-              initialPosition={marks.findIndex(
-                (p) => p.value == parseInt(value, 10)
-              )}
-              className=""
-              separatorType="topFullWidth"
-              withInputField={false}
-              max={max}
-              value={value}
-              onChange={handleRangeChange}
-            />
-          ) : (
-            <BoxControl
-              allowReset="false"
-              className=""
-              label="PADDING"
-              value={value}
-              onChange={handleBoxChange}
-            />
+      {!showUnitControl && isUsingRangeControl ? (
+        <RangeControl
+          initialPosition={marks.findIndex(
+            (p) => p.value === parseInt(value, 10)
           )}
-        </>
+          separatorType="topFullWidth"
+          withInputField={false}
+          max={max}
+          value={value}
+          onChange={handleRangeChange}
+        />
+      ) : (
+        <BoxControl
+          allowReset={false}
+          label="PADDING"
+          value={value}
+          onChange={handleBoxChange}
+        />
       )}
 
       {showUnitControl && (
-        <UnitControl onChange={onChange} value={value} className="" />
+        <UnitControl onChange={onChange} value={value} />
       )}
     </>
   );

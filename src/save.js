@@ -3,7 +3,15 @@ import TaskList from './tasksList.js';
 
 const Save = (props) => {
     const { attributes } = props;
-    const { backgroundColor, tasksListBackgroundColor, cardBackgroundColor, paddingSize, gapSize, spaddingSize, sgapSize, } = attributes;
+    const { 
+        backgroundColor, 
+        tasksListBackgroundColor, 
+        cardBackgroundColor, 
+        paddingSize, 
+        gapSize, 
+        spaddingSize, 
+        sgapSize, 
+    } = attributes;
 
     return (
         <div {...useBlockProps.save()}>

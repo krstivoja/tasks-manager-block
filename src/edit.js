@@ -1,11 +1,8 @@
 import './editor.scss';
-
-import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, useSetting } from '@wordpress/block-editor';
 import { TabPanel, PanelBody, RangeControl, ColorPalette, __experimentalUnitControl as UnitControl, Button, __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import TaskList from './tasksList.js';
 import GapControl from './components/GapControl.js';
-import PaddingControl from './components/GapControl.js';
 
 const Edit = (props) => {
     const bacis = [...useSetting('spacing.spacingSizes')].map(s => ({ value: s.slug }));
@@ -91,9 +88,6 @@ const Edit = (props) => {
                 <ColorPalette value={backgroundColor} colors={[...useSetting('color.palette')]} onChange={setBackgroundColor} />
                 <GapControl value={gapSize} onChange={setgapSize} />
 
-                
-
-
                 <Button variant="secondary" label="Set custom size" className="padding-button" icon="admin-settings" onClick={ButtonTAction}></Button>
                 <BoxControl allowReset="false" className="padding-box" label="PADDING" values={paddingSize} onChange={(value) => { setAttributes({ paddingSize: value }); }} />
                 <RangeControl label="PADDING" initialPosition={marks.findIndex(p => p.value == parseInt(paddingSize["top"], 10))} className="padding-all" separatorType="topFullWidth" withInputField="false" max={max} value={paddingSize} onChange={(value) => { setAttributes({ paddingSize: { top: `${marks[value]["value"]}px`, bottom: `${marks[value]["value"]}px`, left: `${marks[value]["value"]}px`, right: `${marks[value]["value"]}px` } }) }} />
@@ -110,14 +104,13 @@ const Edit = (props) => {
             <ColorPalette value={tasksListBackgroundColor} colors={[...useSetting('color.palette')]} onChange={setTasksListBackgroundColor} />                
             <GapControl value={sgapSize} onChange={setsgapSize} />
 
-
-                <Button variant="secondary" label="Set custom size" className="padding-button" icon="admin-settings" onClick={ButtonTActionT}></Button>
-                <BoxControl allowReset="false" className="padding-box" label="PADDING" values={spaddingSize} onChange={(value) => { setAttributes({ spaddingSize: value }); }} />
-                <RangeControl label="PADDING" initialPosition={marks.findIndex(p => p.value == parseInt(spaddingSize["top"], 10))} className="padding-all" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize} onChange={(value) => { setAttributes({ spaddingSize: { top: `${marks[value]["value"]}px`, bottom: `${marks[value]["value"]}px`, left: `${marks[value]["value"]}px`, right: `${marks[value]["value"]}px` } }); }} />
-                <RangeControl label="PADDING TOP" initialPosition={marks.findIndex(p => p.value == parseInt(spaddingSize["top"], 10))} className="padding-top" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize["top"]} onChange={(value) => { setAttributes({ spaddingSize: { top: `${marks[value]["value"]}px`, bottom: spaddingSize["bottom"], left: spaddingSize["left"], right: spaddingSize["right"] } }); }} />
-                <RangeControl label="PADDING BOTTOM" initialPosition={marks.findIndex(p => p.value == parseInt(spaddingSize["bottom"], 10))} className="padding-bottom" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize["bottom"]} onChange={(value) => { setAttributes({ spaddingSize: { top: spaddingSize["top"], bottom: `${marks[value]["value"]}px`, left: spaddingSize["left"], right: spaddingSize["right"] } }); }} />
-                <RangeControl label="PADDING LEFT" initialPosition={marks.findIndex(p => p.value == parseInt(spaddingSize["left"], 10))} className="padding-left" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize["left"]} onChange={(value) => { setAttributes({ spaddingSize: { top: spaddingSize["top"], bottom: spaddingSize["bottom"], left: `${marks[value]["value"]}px`, right: spaddingSize["right"] } }); }} />
-                <RangeControl label="PADDING RIGHT" initialPosition={marks.findIndex(p => p.value == parseInt(spaddingSize["right"], 10))} className="padding-right" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize["right"]} onChange={(value) => { setAttributes({ spaddingSize: { top: spaddingSize["top"], bottom: spaddingSize["bottom"], left: spaddingSize["left"], right: `${marks[value]["value"]}px` } }); }} />
+            <Button variant="secondary" label="Set custom size" className="padding-button" icon="admin-settings" onClick={ButtonTActionT}></Button>
+            <BoxControl allowReset="false" className="padding-box" label="PADDING" values={spaddingSize} onChange={(value) => { setAttributes({ spaddingSize: value }); }} />
+            <RangeControl label="PADDING" initialPosition={marks.findIndex(p => p.value == parseInt(spaddingSize["top"], 10))} className="padding-all" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize} onChange={(value) => { setAttributes({ spaddingSize: { top: `${marks[value]["value"]}px`, bottom: `${marks[value]["value"]}px`, left: `${marks[value]["value"]}px`, right: `${marks[value]["value"]}px` } }); }} />
+            <RangeControl label="PADDING TOP" initialPosition={marks.findIndex(p => p.value == parseInt(spaddingSize["top"], 10))} className="padding-top" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize["top"]} onChange={(value) => { setAttributes({ spaddingSize: { top: `${marks[value]["value"]}px`, bottom: spaddingSize["bottom"], left: spaddingSize["left"], right: spaddingSize["right"] } }); }} />
+            <RangeControl label="PADDING BOTTOM" initialPosition={marks.findIndex(p => p.value == parseInt(spaddingSize["bottom"], 10))} className="padding-bottom" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize["bottom"]} onChange={(value) => { setAttributes({ spaddingSize: { top: spaddingSize["top"], bottom: `${marks[value]["value"]}px`, left: spaddingSize["left"], right: spaddingSize["right"] } }); }} />
+            <RangeControl label="PADDING LEFT" initialPosition={marks.findIndex(p => p.value == parseInt(spaddingSize["left"], 10))} className="padding-left" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize["left"]} onChange={(value) => { setAttributes({ spaddingSize: { top: spaddingSize["top"], bottom: spaddingSize["bottom"], left: `${marks[value]["value"]}px`, right: spaddingSize["right"] } }); }} />
+            <RangeControl label="PADDING RIGHT" initialPosition={marks.findIndex(p => p.value == parseInt(spaddingSize["right"], 10))} className="padding-right" separatorType="topFullWidth" withInputField="false" max={max} value={spaddingSize["right"]} onChange={(value) => { setAttributes({ spaddingSize: { top: spaddingSize["top"], bottom: spaddingSize["bottom"], left: spaddingSize["left"], right: `${marks[value]["value"]}px` } }); }} />
 
         </PanelBody>
         ,

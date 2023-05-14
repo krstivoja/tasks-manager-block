@@ -1,54 +1,103 @@
-import {  RangeControl, 
-  Button, 
-  __experimentalUnitControl as UnitControl, 
-  __experimentalBoxControl as BoxControl,
-  Icon, 
-  Flex, 
-  FlexItem,
-  BaseControl } from '@wordpress/components';
-
+import { RangeControl, Button, __experimentalUnitControl as UnitControl, __experimentalBoxControl as BoxControl, Icon, Flex } from '@wordpress/components';
 import { useSetting } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import { link, adminGeneric } from '@wordpress/icons';
-import { useState } from '@wordpress/element'; // import useState
+import { settings } from '@wordpress/icons';
+import { useState, useEffect, useMemo } from '@wordpress/element';
+
+// Avoid magic strings
+const RANGE_CONTROL = 'RangeControl';
+const BOX_CONTROL = 'BoxControl';
 
 const GapControl = ({ value, onChange }) => {
-const spacingSizes = [...useSetting('spacing.spacingSizes')];
-const additionalSizes = [{ value: 0 }];
-const marks = additionalSizes.concat(spacingSizes.map(s => ({ value: s.slug })));
-const max = spacingSizes.length;
+  const spacingSizes = [...useSetting('spacing.spacingSizes')];
+  const additionalSizes = [{ value: 0 }];
 
-const [showUnitControl, setShowUnitControl] = useState(true); // state for toggling
+  // useMemo to avoid unnecessary calculations on each render
+  const marks = useMemo(() => additionalSizes.concat(spacingSizes.map(s => ({ value: s.slug }))), [spacingSizes, additionalSizes]);
+  const max = spacingSizes.length;
 
-return (
-<>
-<Flex direction={['column', 'row']}>
-<label>Block spacings</label>
-<Button 
-  variant="secondary"  className="components-button is-small has-icon"
-  onClick={() => setShowUnitControl(!showUnitControl)}>
-  <Icon icon={ link } />
-</Button>
-</Flex>
+  const [showUnitControl, setShowUnitControl] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [isUsingRangeControl, setIsUsingRangeControl] = useState(true);
 
-{showUnitControl ? (
-<UnitControl onChange={onChange} value={value} className="" />
-) : (
-<RangeControl
-  initialPosition={marks.findIndex(p => p.value == parseInt(value, 10))}
-  className=""
-  separatorType="topFullWidth"
-  withInputField={false}
-  max={max}
-  value={value}
-  onChange={(newValue) => { onChange(`${marks[newValue]["value"]}px`); }}
-/>
-)}
+  const handleRangeChange = (newValue) => {
+    setIsUsingRangeControl(true);
+    onChange(`${marks[newValue]["value"]}px`);
+  };
 
-<BoxControl allowReset="false" className="" label="PADDING" value={value} onChange={onChange} />
+  const handleBoxChange = (newValue) => {
+    setIsUsingRangeControl(false);
+    onChange(newValue);
+  };
 
-</>
-);
-};
+  const toggleUnitControl = () => {
+    setShowUnitControl(!showUnitControl);
+    setIsActive(!isActive);
+  };
 
-export default GapControl;
+  useEffect(() => {
+    try {
+      const storedControlType = localStorage.getItem('blockSpacingControlType');
+      if (storedControlType === RANGE_CONTROL) {
+        setIsUsingRangeControl(true);
+      } else if (storedControlType === BOX_CONTROL) {
+        setIsUsingRangeControl(false);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('blockSpacingControlType', isUsingRangeControl ? RANGE_CONTROL : BOX_CONTROL);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [isUsingRangeControl]);
+
+  return (
+    <>
+      <Flex direction={['column', 'row']}>
+        <label>BLOCK SPACING</label>
+        <Button
+          className={`components-button is-small has-icon ${isActive ? 'is-pressed' : ''}`}
+          onClick={toggleUnitControl}
+        >
+          <Icon icon={settings} />
+        </Button>
+      </Flex>
+
+      {!showUnitControl && (
+        <>
+          {isUsingRangeControl ? (
+                        <RangeControl
+                        initialPosition={marks.findIndex(p => p.value == parseInt(value, 10))}
+                        className=""
+                        separatorType="topFullWidth"
+                        withInputField={false}
+                        max={max}
+                        value={value}
+                        onChange={handleRangeChange}
+                      />
+                    ) : (
+                      <BoxControl
+                        allowReset="false"
+                        className=""
+                        label="PADDING"
+                        value={value}
+                        onChange={handleBoxChange}
+                      />
+                    )}
+                  </>
+                )}
+          
+                {showUnitControl && (
+                  <UnitControl onChange={onChange} value={value} className="" />
+                )}
+              </>
+            );
+          };
+          
+          export default GapControl;
+          

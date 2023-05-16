@@ -5,6 +5,11 @@ import { isEmpty } from "lodash";
 import { useSelect } from "@wordpress/data";
 import { Placeholder, Spinner } from "@wordpress/components";
 
+/**
+ * Custom Dependencies
+ */
+import maybeProcessThemeVars from "./utils/process-theme-vars";
+
 function TaskList(props) {
   const { terms, hasTermsResolved } = useSelect((select) => {
     const selectorArgs = [
@@ -76,11 +81,11 @@ function TaskList(props) {
       className="tasks-shortcode"
       style={{
         backgroundColor: props.backgroundColor,
-        gap: props.gapSize,
-        paddingTop: props.paddingSize["top"],
-        paddingLeft: props.paddingSize["left"],
-        paddingRight: props.paddingSize["right"],
-        paddingBottom: props.paddingSize["bottom"],
+        gap: maybeProcessThemeVars(props.groupSpacing["all"]),
+        paddingTop: maybeProcessThemeVars(props.wrapperPadding["top"]),
+        paddingLeft: maybeProcessThemeVars(props.wrapperPadding["left"]),
+        paddingRight: maybeProcessThemeVars(props.wrapperPadding["right"]),
+        paddingBottom: maybeProcessThemeVars(props.wrapperPadding["bottom"]),
       }}
     >
       {terms.map((term) => (

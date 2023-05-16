@@ -18,9 +18,13 @@
             "type": "string",
             "default": ""
         },
-        "paddingSize": {
+        "groupSpacing": {
             "type": "object",
-            "default": ""
+            "default": {}
+        },
+        "wrapperPadding": {
+            "type": "object",
+            "default": {}
         },
         "spaddingSize": {
             "type": "object",
@@ -30,12 +34,10 @@
             "type": "string",
             "default": ""
         },
-
         "sgapSize": {
             "type": "string",
             "default": ""
         }
-
     },
     "supports": {
         "align": [

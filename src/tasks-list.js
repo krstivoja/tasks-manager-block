@@ -9,6 +9,7 @@ import { Placeholder, Spinner } from "@wordpress/components";
  * Custom Dependencies
  */
 import maybeProcessThemeVars from "./utils/process-theme-vars";
+import processBorder from "./utils/process-border";
 
 function TaskList(props) {
   const { terms, hasTermsResolved } = useSelect((select) => {
@@ -75,6 +76,7 @@ function TaskList(props) {
   };
 
   const groupedTasks = getGroupedTasks();
+  const processedWrapperBorder = processBorder(props.wrapperBorder);
 
   return (
     <div
@@ -86,6 +88,7 @@ function TaskList(props) {
         paddingLeft: maybeProcessThemeVars(props.wrapperPadding["left"]),
         paddingRight: maybeProcessThemeVars(props.wrapperPadding["right"]),
         paddingBottom: maybeProcessThemeVars(props.wrapperPadding["bottom"]),
+        ...processedWrapperBorder,
       }}
     >
       {terms.map((term) => (

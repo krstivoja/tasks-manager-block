@@ -3,12 +3,12 @@
  */
 import { __ } from "@wordpress/i18n";
 import { isEmpty } from "lodash";
+import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
 import {
-  useBlockProps,
-  InspectorControls,
-  useSetting,
-} from "@wordpress/block-editor";
-import { TabPanel } from "@wordpress/components";
+  TabPanel,
+  PanelBody,
+  __experimentalBorderBoxControl as BorderBoxControl,
+} from "@wordpress/components";
 
 /**
  * Custom Dependencies
@@ -18,25 +18,12 @@ import TaskList from "./tasks-list.js";
 
 import Colors from "./components/colors";
 import Dimensions from "./components/dimensions";
+import Border from "./components/border";
 
 const Edit = (props) => {
   const { attributes, setAttributes } = props;
-  const { backgroundColor, wrapperPadding, groupSpacing } = attributes;
-
-  const setTasksListBackgroundColor = (value) => {
-    setAttributes({ tasksListBackgroundColor: value });
-  };
-
-  const setCardBackgroundColor = (value) => {
-    setAttributes({ cardBackgroundColor: value });
-  };
-  const setsgapSize = (value) => {
-    setAttributes({ sgapSize: value });
-  };
-
-  const setgapSize = (value) => {
-    setAttributes({ gapSize: value });
-  };
+  const { backgroundColor, wrapperPadding, groupSpacing, wrapperBorder } =
+    attributes;
 
   const tabs = {
     wrapper: (
@@ -80,6 +67,12 @@ const Edit = (props) => {
               values: groupSpacing,
             },
           ]}
+        />
+        <Border
+          value={wrapperBorder}
+          onChange={(newWrapperBorder) =>
+            props.setAttributes({ wrapperBorder: newWrapperBorder })
+          }
         />
       </>
     ),
@@ -132,12 +125,13 @@ const Edit = (props) => {
         attributes={attributes}
         backgroundColor={attributes.backgroundColor}
         tasksListBackgroundColor={attributes.tasksListBackgroundColor}
-        groupSpacing={groupSpacing}
         cardBackgroundColor={attributes.cardBackgroundColor}
         wrapperPadding={wrapperPadding}
         gapSize={attributes.gapSize}
         spaddingSize={attributes.spaddingSize}
         sgapSize={attributes.sgapSize}
+        groupSpacing={groupSpacing}
+        wrapperBorder={wrapperBorder}
       />
     </div>
   );

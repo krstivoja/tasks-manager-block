@@ -26,7 +26,19 @@ export default function processBorder(border) {
     return finalBorder;
   }
 
-  return {
-    border: `${border?.width} ${border?.style ?? "solid"} ${border?.color}`,
-  };
+  const mergedBorder = {};
+
+  if (has(border, "width")) {
+    mergedBorder.borderWidth = border.width;
+  }
+
+  if (has(border, "color")) {
+    mergedBorder.borderColor = border.color;
+  }
+
+  if (has(border, "style")) {
+    mergedBorder.borderStyle = border.style;
+  }
+
+  return mergedBorder;
 }

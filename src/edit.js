@@ -22,25 +22,37 @@ import Border from "./components/border";
 
 const Edit = (props) => {
   const { attributes, setAttributes } = props;
-  const { backgroundColor, wrapperPadding, groupSpacing, wrapperBorder } =
-    attributes;
+  const {
+    backgroundColor,
+    wrapperPadding,
+    groupSpacing,
+    wrapperBorder,
+    wrapperBackgroundColor,
+    listPadding,
+    listBorder,
+    listBackgroundColor,
+    listCardSpacing,
+    cardBorder,
+    cardPadding,
+    cardBackgroundColor,
+  } = attributes;
 
   const tabs = {
     wrapper: (
       <>
         <Colors
           resetAll={() => {
-            setAttributes({ backgroundColor: "" });
+            setAttributes({ wrapperBackgroundColor: "" });
           }}
           settings={[
             {
-              value: backgroundColor,
+              value: wrapperBackgroundColor,
               onChange: (newBackgroundColor) => {
-                setAttributes({ backgroundColor: newBackgroundColor });
+                setAttributes({ wrapperBackgroundColor: newBackgroundColor });
               },
               label: __("Background", "tasks-manager"),
               resetAllFilter: () => {
-                setAttributes({ backgroundColor: "" });
+                setAttributes({ wrapperBackgroundColor: "" });
               },
             },
           ]}
@@ -76,25 +88,96 @@ const Edit = (props) => {
         />
       </>
     ),
-    // lists: (
-    //   <PanelBody title={__("Background", "tasks-manager")}>
-    //     <ColorPalette
-    //       value={tasksListBackgroundColor}
-    //       colors={[...useSetting("color.palette")]}
-    //       onChange={setTasksListBackgroundColor}
-    //     />
-    //     <GapControl value={sgapSize} onChange={setsgapSize} />
-    //   </PanelBody>
-    // ),
-    // cards: (
-    //   <PanelBody title={__("Background", "tasks-manager")}>
-    //     <ColorPalette
-    //       value={cardBackgroundColor}
-    //       colors={[...useSetting("color.palette")]}
-    //       onChange={setCardBackgroundColor}
-    //     />
-    //   </PanelBody>
-    // ),
+    lists: (
+      <>
+        <Colors
+          resetAll={() => {
+            setAttributes({ listBackgroundColor: "" });
+          }}
+          settings={[
+            {
+              value: listBackgroundColor,
+              onChange: (newListBackgroundColor) => {
+                setAttributes({ listBackgroundColor: newListBackgroundColor });
+              },
+              label: __("Background", "tasks-manager"),
+              resetAllFilter: () => {
+                setAttributes({ listBackgroundColor: "" });
+              },
+            },
+          ]}
+        />
+        <Dimensions
+          settings={[
+            {
+              label: __("Padding", "tasks-manager"),
+              hasValue: () => !isEmpty(listPadding),
+              sides: ["top", "right", "bottom", "left"],
+              onResetAll: () => props.setAttributes({ listPadding: {} }),
+              onChange: (newListPadding) =>
+                props.setAttributes({ listPadding: newListPadding }),
+              values: listPadding,
+            },
+            {
+              label: __("Block Spacing", "tasks-manager"),
+              hasValue: () => !isEmpty(listCardSpacing),
+              onResetAll: () => props.setAttributes({ listCardSpacing: {} }),
+              onChange: (newListCardSpacing) => {
+                props.setAttributes({ listCardSpacing: newListCardSpacing });
+              },
+              sides: ["all"],
+              values: listCardSpacing,
+            },
+          ]}
+        />
+        <Border
+          value={listBorder}
+          onChange={(newListBorder) =>
+            props.setAttributes({ listBorder: newListBorder })
+          }
+        />
+      </>
+    ),
+    cards: (
+      <>
+        <Colors
+          resetAll={() => {
+            setAttributes({ cardBackgroundColor: "" });
+          }}
+          settings={[
+            {
+              value: cardBackgroundColor,
+              onChange: (newCardBackgroundColor) => {
+                setAttributes({ cardBackgroundColor: newCardBackgroundColor });
+              },
+              label: __("Background", "tasks-manager"),
+              resetAllFilter: () => {
+                setAttributes({ cardBackgroundColor: "" });
+              },
+            },
+          ]}
+        />
+        <Dimensions
+          settings={[
+            {
+              label: __("Padding", "tasks-manager"),
+              hasValue: () => !isEmpty(cardPadding),
+              sides: ["top", "right", "bottom", "left"],
+              onResetAll: () => props.setAttributes({ cardPadding: {} }),
+              onChange: (newCardPadding) =>
+                props.setAttributes({ cardPadding: newCardPadding }),
+              values: cardPadding,
+            },
+          ]}
+        />
+        <Border
+          value={cardBorder}
+          onChange={(newCardBorder) =>
+            props.setAttributes({ cardBorder: newCardBorder })
+          }
+        />
+      </>
+    ),
   };
 
   return (
@@ -106,14 +189,14 @@ const Edit = (props) => {
               name: "wrapper",
               title: __("Wrapper", "tasks-manager"),
             },
-            // {
-            //   name: "lists",
-            //   title: __("Lists", "tasks-manager"),
-            // },
-            // {
-            //   name: "cards",
-            //   title: __("Cards", "tasks-manager"),
-            // },
+            {
+              name: "lists",
+              title: __("Lists", "tasks-manager"),
+            },
+            {
+              name: "cards",
+              title: __("Cards", "tasks-manager"),
+            },
           ]}
         >
           {(tab) => tabs[tab.name]}
@@ -123,15 +206,17 @@ const Edit = (props) => {
       <TaskList
         block="tasks-manager/tasks-progress"
         attributes={attributes}
-        backgroundColor={attributes.backgroundColor}
-        tasksListBackgroundColor={attributes.tasksListBackgroundColor}
-        cardBackgroundColor={attributes.cardBackgroundColor}
+        listBackgroundColor={listBackgroundColor}
         wrapperPadding={wrapperPadding}
-        gapSize={attributes.gapSize}
-        spaddingSize={attributes.spaddingSize}
-        sgapSize={attributes.sgapSize}
+        listBorder={listBorder}
+        cardBorder={cardBorder}
+        cardPadding={cardPadding}
+        listPadding={listPadding}
         groupSpacing={groupSpacing}
         wrapperBorder={wrapperBorder}
+        listCardSpacing={listCardSpacing}
+        cardBackgroundColor={cardBackgroundColor}
+        wrapperBackgroundColor={wrapperBackgroundColor}
       />
     </div>
   );

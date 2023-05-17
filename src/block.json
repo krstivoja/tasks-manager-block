@@ -6,15 +6,7 @@
     "icon": "calendar",
     "category": "layout",
     "attributes": {
-        "backgroundColor": {
-            "type": "string",
-            "default": ""
-        },
-        "tasksListBackgroundColor": {
-            "type": "string",
-            "default": ""
-        },
-        "cardBackgroundColor": {
+        "wrapperBackgroundColor": {
             "type": "string",
             "default": ""
         },
@@ -30,15 +22,37 @@
             "type": "object",
             "default": {}
         },
-        "spaddingSize": {
+        "listBorder": {
             "type": "object",
+            "default": {}
+        },
+        "listCardSpacing": {
+            "type": "object",
+            "default": {
+                "all": "0px"
+            }
+        },
+        "listPadding": {
+            "type": "object",
+            "default": {}
+        },
+        "listBackgroundColor": {
+            "type": "string",
             "default": ""
         },
         "gapSize": {
             "type": "string",
             "default": ""
         },
-        "sgapSize": {
+        "cardBorder": {
+            "type": "object",
+            "default": {}
+        },
+        "cardPadding": {
+            "type": "object",
+            "default": {}
+        },
+        "cardBackgroundColor": {
             "type": "string",
             "default": ""
         }

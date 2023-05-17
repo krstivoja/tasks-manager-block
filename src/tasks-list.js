@@ -76,19 +76,18 @@ function TaskList(props) {
   };
 
   const groupedTasks = getGroupedTasks();
-  const processedWrapperBorder = processBorder(props.wrapperBorder);
 
   return (
     <div
       className="tasks-shortcode"
       style={{
-        backgroundColor: props.backgroundColor,
+        backgroundColor: props.wrapperBackgroundColor,
         gap: maybeProcessThemeVars(props.groupSpacing["all"]),
         paddingTop: maybeProcessThemeVars(props.wrapperPadding["top"]),
         paddingLeft: maybeProcessThemeVars(props.wrapperPadding["left"]),
         paddingRight: maybeProcessThemeVars(props.wrapperPadding["right"]),
         paddingBottom: maybeProcessThemeVars(props.wrapperPadding["bottom"]),
-        ...processedWrapperBorder,
+        ...processBorder(props.wrapperBorder),
       }}
     >
       {terms.map((term) => (
@@ -98,12 +97,15 @@ function TaskList(props) {
             <div
               className="tasks-list"
               style={{
-                backgroundColor: props.tasksListBackgroundColor,
-                gap: props.sgapSize,
-                paddingTop: props.spaddingSize["top"],
-                paddingLeft: props.spaddingSize["left"],
-                paddingRight: props.spaddingSize["right"],
-                paddingBottom: props.spaddingSize["bottom"],
+                gap: maybeProcessThemeVars(props?.listCardSpacing?.all),
+                backgroundColor: props.listBackgroundColor,
+                paddingTop: maybeProcessThemeVars(props.listPadding["top"]),
+                paddingLeft: maybeProcessThemeVars(props.listPadding["left"]),
+                paddingRight: maybeProcessThemeVars(props.listPadding["right"]),
+                paddingBottom: maybeProcessThemeVars(
+                  props.listPadding["bottom"]
+                ),
+                ...processBorder(props.listBorder),
               }}
             >
               {groupedTasks[term.id].map((task) => {
@@ -111,7 +113,22 @@ function TaskList(props) {
                   <div
                     key={task.id}
                     className="task-item"
-                    style={{ backgroundColor: props.cardBackgroundColor }}
+                    style={{
+                      backgroundColor: props.cardBackgroundColor,
+                      paddingTop: maybeProcessThemeVars(
+                        props.cardPadding["top"]
+                      ),
+                      paddingLeft: maybeProcessThemeVars(
+                        props.cardPadding["left"]
+                      ),
+                      paddingRight: maybeProcessThemeVars(
+                        props.cardPadding["right"]
+                      ),
+                      paddingBottom: maybeProcessThemeVars(
+                        props.cardPadding["bottom"]
+                      ),
+                      ...processBorder(props.cardBorder),
+                    }}
                   >
                     <span className="task-title">{task.title.rendered}</span>
 

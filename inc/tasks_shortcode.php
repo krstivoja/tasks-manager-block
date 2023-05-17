@@ -1,55 +1,20 @@
 <?php
 
-function tasks_shortcode($atts)
+function tasks_shortcode($_, $block_content)
 {
-    $atts = shortcode_atts(
-        array(
-            'backgroundColor' => '',
-            'tasksListBackgroundColor' => '',
-            'cardBackgroundColor' => '',
-            'align' => '',
-            'paddingSize' => '',
-            'gapSize' => '',
-            'spaddingSize' => '',
-            'sgapSize' => '',
-        ),
-        $atts,
-        'tasks_progress'
-    );
-
-
-    $align_class = $atts['align'] ? 'align' . $atts['align'] : '';
-    $block_gap = $atts['gapSize'] ? $atts['gapSize'] : '';
-    $sblock_gap = $atts['sgapSize'] ? $atts['sgapSize'] : '';
-    if ($atts['paddingSize']) {
-        $padding_top = $atts['paddingSize']['top'];
-        $padding_right = $atts['paddingSize']['right'];
-        $padding_bottom = $atts['paddingSize']['bottom'];
-        $padding_left = $atts['paddingSize']['left'];
-    } else {
-        $padding_top = "";
-        $padding_right = "";
-        $padding_bottom = "";
-        $padding_left = "";
-    }
-    if ($atts['spaddingSize']) {
-        $spadding_top = $atts['spaddingSize']['top'];
-        $spadding_right = $atts['spaddingSize']['right'];
-        $spadding_bottom = $atts['spaddingSize']['bottom'];
-        $spadding_left = $atts['spaddingSize']['left'];
-    } else {
-        $spadding_top = "";
-        $spadding_right = "";
-        $spadding_bottom = "";
-        $spadding_left = "";
-    }
-
+    $blockprops = json_decode($block_content, true);
     ob_start();
-    $terms = get_terms(array('taxonomy' => 'progress', 'hide_empty' => false));
+
+    $terms = get_terms(
+        array(
+            'taxonomy' => 'progress',
+            'hide_empty' => false
+        )
+    );
 
 ?>
 
-    <div class="tasks-shortcode <?php echo esc_attr($align_class); ?>" style="gap:<?php echo $block_gap ?>;padding-top:<?php echo $padding_top ?>;padding-right:<?php echo $padding_right ?>;padding-bottom:<?php echo $padding_bottom ?>;padding-left:<?php echo $padding_left ?>;background-color: <?php echo esc_attr($atts['backgroundColor']); ?>;">
+    <div class="tasks-shortcode <?php $blockprops['blockProps']['className']; ?>" style="<?php echo $blockprops['wrapperStyles']; ?>">
         <?php foreach ($terms as $term) : ?>
             <div class="tasks-group-wrap">
                 <h3><?php echo $term->name; ?></h3>
@@ -72,11 +37,11 @@ function tasks_shortcode($atts)
                 $tasks = new WP_Query($task_args);
                 ?>
 
-                <div class="tasks-list" id="<?php echo $term->slug; ?>" data-term-id="<?php echo $term->term_id; ?>" style="gap:<?php echo $sblock_gap ?>;padding-top:<?php echo $spadding_top ?>;padding-right:<?php echo $spadding_right ?>;padding-bottom:<?php echo $spadding_bottom ?>;padding-left:<?php echo $spadding_left ?>;background-color: <?php echo esc_attr($atts['tasksListBackgroundColor']); ?>">
+                <div class="tasks-list" id="<?php echo $term->slug; ?>" data-term-id="<?php echo $term->term_id; ?>" style="<?php echo $blockprops['listStyles']; ?>">
 
                     <?php if ($tasks->have_posts()) : ?>
                         <?php while ($tasks->have_posts()) : $tasks->the_post(); ?>
-                            <div class="task-item" data-id="<?php echo get_the_ID(); ?>" style="background-color: <?php echo esc_attr($atts['cardBackgroundColor']); ?>">
+                            <div class="task-item" data-id="<?php echo get_the_ID(); ?>" style="<?php echo $blockprops['cardStyles']; ?>">
                                 <span class="task-title"><?php echo get_the_title(); ?></span>
                                 <button class="read-more wp-element-button" data-id="<?php echo get_the_ID(); ?>">Read More</button>
                                 <dialog class="task-content" id="task-content-<?php echo get_the_ID(); ?>">

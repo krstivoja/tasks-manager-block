@@ -1,6 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { registerBlockType } from "@wordpress/blocks";
 import Edit from "./edit";
+import Save from "./save";
 import "./style.scss";
 
 registerBlockType("tasks-manager/tasks-progress", {
@@ -8,7 +9,5 @@ registerBlockType("tasks-manager/tasks-progress", {
   icon: "calendar",
   category: "common",
   edit: Edit,
-
-  // Handled via PHP (Server Side).
-  save: () => null,
+  save: Save,
 });

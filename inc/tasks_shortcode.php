@@ -3,6 +3,13 @@
 function tasks_shortcode($_, $block_content)
 {
     $blockprops = json_decode($block_content, true);
+    $wrapper_attributes = get_block_wrapper_attributes(
+        array(
+            'class' => 'tasks-shortcode',
+            'style' => $blockprops['wrapperStyles']
+        )
+    );
+
     ob_start();
 
     $terms = get_terms(
@@ -14,7 +21,7 @@ function tasks_shortcode($_, $block_content)
 
 ?>
 
-    <div class="tasks-shortcode <?php $blockprops['blockProps']['className']; ?>" style="<?php echo $blockprops['wrapperStyles']; ?>">
+    <div <?php echo $wrapper_attributes; ?>>
         <?php foreach ($terms as $term) : ?>
             <div class="tasks-group-wrap">
                 <h3><?php echo $term->name; ?></h3>

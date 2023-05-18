@@ -4,11 +4,7 @@
 import { __ } from "@wordpress/i18n";
 import { isEmpty } from "lodash";
 import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
-import {
-  TabPanel,
-  PanelBody,
-  __experimentalBorderBoxControl as BorderBoxControl,
-} from "@wordpress/components";
+import { TabPanel } from "@wordpress/components";
 
 /**
  * Custom Dependencies
@@ -19,11 +15,11 @@ import TaskList from "./tasks-list.js";
 import Colors from "./components/colors";
 import Dimensions from "./components/dimensions";
 import Border from "./components/border";
+import Typography from "./components/typography";
 
 const Edit = (props) => {
   const { attributes, setAttributes } = props;
   const {
-    backgroundColor,
     wrapperPadding,
     groupSpacing,
     wrapperBorder,
@@ -35,6 +31,10 @@ const Edit = (props) => {
     cardBorder,
     cardPadding,
     cardBackgroundColor,
+    listTextColor,
+    cardTextColor,
+    listTextSize,
+    cardTextSize,
   } = attributes;
 
   const tabs = {
@@ -105,6 +105,16 @@ const Edit = (props) => {
                 setAttributes({ listBackgroundColor: "" });
               },
             },
+            {
+              value: listTextColor,
+              label: __("Color", "tasks-manager"),
+              onChange: (newListTextColor) => {
+                setAttributes({ listTextColor: newListTextColor });
+              },
+              resetAllFilter: () => {
+                setAttributes({ listTextColor: "" });
+              },
+            },
           ]}
         />
         <Dimensions
@@ -136,6 +146,12 @@ const Edit = (props) => {
             props.setAttributes({ listBorder: newListBorder })
           }
         />
+        <Typography
+          value={listTextSize}
+          onChange={(newListTextSize) =>
+            props.setAttributes({ listTextSize: newListTextSize })
+          }
+        />
       </>
     ),
     cards: (
@@ -153,6 +169,16 @@ const Edit = (props) => {
               label: __("Background", "tasks-manager"),
               resetAllFilter: () => {
                 setAttributes({ cardBackgroundColor: "" });
+              },
+            },
+            {
+              value: cardTextColor,
+              label: __("Color", "tasks-manager"),
+              onChange: (newCardTextColor) => {
+                setAttributes({ cardTextColor: newCardTextColor });
+              },
+              resetAllFilter: () => {
+                setAttributes({ cardTextColor: "" });
               },
             },
           ]}
@@ -174,6 +200,12 @@ const Edit = (props) => {
           value={cardBorder}
           onChange={(newCardBorder) =>
             props.setAttributes({ cardBorder: newCardBorder })
+          }
+        />
+        <Typography
+          value={cardTextSize}
+          onChange={(newCardTextSize) =>
+            props.setAttributes({ cardTextSize: newCardTextSize })
           }
         />
       </>
@@ -206,7 +238,6 @@ const Edit = (props) => {
       <TaskList
         block="tasks-manager/tasks-progress"
         attributes={attributes}
-        listBackgroundColor={listBackgroundColor}
         wrapperPadding={wrapperPadding}
         listBorder={listBorder}
         cardBorder={cardBorder}
@@ -214,7 +245,12 @@ const Edit = (props) => {
         listPadding={listPadding}
         groupSpacing={groupSpacing}
         wrapperBorder={wrapperBorder}
+        listTextColor={listTextColor}
+        listTextSize={listTextSize}
+        cardTextColor={cardTextColor}
+        cardTextSize={cardTextSize}
         listCardSpacing={listCardSpacing}
+        listBackgroundColor={listBackgroundColor}
         cardBackgroundColor={cardBackgroundColor}
         wrapperBackgroundColor={wrapperBackgroundColor}
       />

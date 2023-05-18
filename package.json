@@ -24,6 +24,7 @@
 		"readme.txt"
 	],
 	"dependencies": {
+		"@emotion/styled": "^11.11.0",
 		"@wordpress/icons": "^9.24.0"
 	}
 }

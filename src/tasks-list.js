@@ -92,7 +92,14 @@ function TaskList(props) {
     >
       {terms.map((term) => (
         <div key={term.id} className="tasks-group-wrap">
-          <h3>{term.name}</h3>
+          <h3
+            style={{
+              color: props.listTextColor,
+              fontSize: props.listTextSize,
+            }}
+          >
+            {term.name}
+          </h3>
           {groupedTasks[term.id] && groupedTasks[term.id].length > 0 ? (
             <div
               className="tasks-list"
@@ -130,7 +137,15 @@ function TaskList(props) {
                       ...processBorder(props.cardBorder),
                     }}
                   >
-                    <span className="task-title">{task.title.rendered}</span>
+                    <span
+                      className="task-title"
+                      style={{
+                        color: props.cardTextColor,
+                        fontSize: props.cardTextSize,
+                      }}
+                    >
+                      {task.title.rendered}
+                    </span>
 
                     <button
                       className="read-more wp-element-button"

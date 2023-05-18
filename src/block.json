@@ -40,6 +40,22 @@
             "type": "string",
             "default": ""
         },
+        "listTextColor": {
+            "type": "string",
+            "default": ""
+        },
+        "listTextSize": {
+            "type": "string",
+            "default": ""
+        },
+        "cardTextSize": {
+            "type": "string",
+            "default": ""
+        },
+        "cardTextColor": {
+            "type": "string",
+            "default": ""
+        },
         "gapSize": {
             "type": "string",
             "default": ""

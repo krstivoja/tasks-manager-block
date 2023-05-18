@@ -24,6 +24,14 @@ function save({ attributes }) {
       paddingBottom: maybeProcessThemeVars(attributes.cardPadding["bottom"]),
       ...processBorder(attributes.cardBorder),
     }),
+    listTypographyStyles: processStyles({
+      color: attributes.listTextColor,
+      fontSize: attributes.listTextSize,
+    }),
+    cardTypographyStyles: processStyles({
+      color: attributes.cardTextColor,
+      fontSize: attributes.cardTextSize,
+    }),
     listStyles: processStyles({
       gap: maybeProcessThemeVars(attributes.listCardSpacing?.all),
       backgroundColor: attributes.listBackgroundColor,

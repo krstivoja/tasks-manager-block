@@ -1,7 +1,16 @@
 <?php
 
 // AJAX function for updating tasks order
-function update_tasks_order() {
+function update_tasks_order()
+{
+
+    $nonce = isset($_POST['nonce']) ? $_POST['nonce'] : '';
+    $is_nonce_verified = wp_verify_nonce($nonce, 'task-manager-sortable');
+
+    if (!$is_nonce_verified) {
+        return wp_send_json_error('Unauthorized');
+    }
+
     if (current_user_can('administrator') && isset($_POST['tasks_order'])) {
         $tasks_order = $_POST['tasks_order'];
         foreach ($tasks_order as $order => $task_id) {
@@ -17,7 +26,15 @@ add_action('wp_ajax_update_tasks_order', 'update_tasks_order');
 
 
 // AJAX function for updating tasks taxonomy term
-function update_tasks_taxonomy() {
+function update_tasks_taxonomy()
+{
+    $nonce = isset($_POST['nonce']) ? $_POST['nonce'] : '';
+    $is_nonce_verified = wp_verify_nonce($nonce, 'task-manager-sortable');
+
+    if (!$is_nonce_verified) {
+        return wp_send_json_error('Unauthorized');
+    }
+
     if (current_user_can('administrator') && isset($_POST['task_id']) && isset($_POST['term_id'])) {
         $task_id = intval($_POST['task_id']);
         $term_id = intval($_POST['term_id']);
@@ -34,6 +51,3 @@ function update_tasks_taxonomy() {
     }
 }
 add_action('wp_ajax_update_tasks_taxonomy', 'update_tasks_taxonomy');
-
-
-?>

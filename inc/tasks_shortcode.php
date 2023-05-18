@@ -30,7 +30,8 @@ function tasks_shortcode($_, $block_content)
     $wrapper_attributes = get_block_wrapper_attributes(
         array(
             'class' => 'tasks-shortcode',
-            'style' => $blockprops['wrapperStyles']
+            'style' => $blockprops['wrapperStyles'],
+            'id'    => isset($blockprops['blockProps']['id']) ? $blockprops['blockProps']['id'] : ''
         )
     );
 

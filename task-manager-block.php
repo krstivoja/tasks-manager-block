@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:       Task Manager Block - Github
+ * Plugin Name:       Task Manager Block
  * Description:       Example block scaffolded with Create Block tool.
  * Requires at least: 6.1
  * Requires PHP:      7.0

@@ -1,10 +1,10 @@
 <?php
 
 // AJAX function for updating tasks order
-function tm_update_tasks_order()
+function update_tasks_order()
 {
-    // Check nonce and sanitize input
-    $nonce = isset($_POST['nonce']) ? sanitize_text_field($_POST['nonce']) : '';
+
+    $nonce = isset($_POST['nonce']) ? $_POST['nonce'] : '';
     $is_nonce_verified = wp_verify_nonce($nonce, 'task-manager-sortable');
 
     if (!$is_nonce_verified) {
@@ -12,11 +12,7 @@ function tm_update_tasks_order()
     }
 
     if (current_user_can('administrator') && isset($_POST['tasks_order'])) {
-        // Validate and sanitize the tasks_order array
-        $tasks_order = isset($_POST['tasks_order']) && is_array($_POST['tasks_order']) 
-            ? array_map('intval', $_POST['tasks_order']) 
-            : [];
-
+        $tasks_order = $_POST['tasks_order'];
         foreach ($tasks_order as $order => $task_id) {
             wp_update_post(array('ID' => $task_id, 'menu_order' => $order));
         }
@@ -25,15 +21,14 @@ function tm_update_tasks_order()
         wp_send_json_error('Error updating tasks order.');
     }
 }
-add_action('wp_ajax_tm_update_tasks_order', 'tm_update_tasks_order');
+add_action('wp_ajax_update_tasks_order', 'update_tasks_order');
 
 
 
 // AJAX function for updating tasks taxonomy term
-function tm_update_tasks_taxonomy()
+function update_tasks_taxonomy()
 {
-    // Check nonce and sanitize input
-    $nonce = isset($_POST['nonce']) ? sanitize_text_field($_POST['nonce']) : '';
+    $nonce = isset($_POST['nonce']) ? $_POST['nonce'] : '';
     $is_nonce_verified = wp_verify_nonce($nonce, 'task-manager-sortable');
 
     if (!$is_nonce_verified) {
@@ -41,9 +36,8 @@ function tm_update_tasks_taxonomy()
     }
 
     if (current_user_can('administrator') && isset($_POST['task_id']) && isset($_POST['term_id'])) {
-        // Validate and sanitize input
-        $task_id = isset($_POST['task_id']) ? intval($_POST['task_id']) : 0;
-        $term_id = isset($_POST['term_id']) ? intval($_POST['term_id']) : 0;
+        $task_id = intval($_POST['task_id']);
+        $term_id = intval($_POST['term_id']);
 
         $term = get_term($term_id, 'progress');
         if ($term) {
@@ -56,4 +50,4 @@ function tm_update_tasks_taxonomy()
         wp_send_json_error('Error updating task taxonomy term. Insufficient data or permissions.');
     }
 }
-add_action('wp_ajax_tm_update_tasks_taxonomy', 'tm_update_tasks_taxonomy');
+add_action('wp_ajax_update_tasks_taxonomy', 'update_tasks_taxonomy');

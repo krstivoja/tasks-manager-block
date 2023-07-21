@@ -16,9 +16,9 @@ jQuery(document).ready(function ($) {
               tasks_order: tasksOrder,
               nonce: ajaxObject.nonce,
             },
-            success: function (response) {
-              console.log(response);
-            },
+            // success: function (response) {
+            //   console.log(response);
+            // },
           });
         },
         onAdd: function (evt) {
@@ -33,9 +33,9 @@ jQuery(document).ready(function ($) {
               term_id: term_id,
               nonce: ajaxObject.nonce,
             },
-            success: function (response) {
-              console.log(response);
-            },
+            // success: function (response) {
+            //   console.log(response);
+            // },
           });
         },
       });

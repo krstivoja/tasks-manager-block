@@ -36,7 +36,7 @@ add_action('init', 'create_block_task_manager_block_block_init');
 function enqueue_sortable_scripts()
 {
     if (current_user_can('administrator') && has_block('tasks-manager/tasks-progress')) {
-        wp_enqueue_script('sortablejs', 'https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js', array(), null, true);
+        wp_enqueue_script('sortablejs', plugin_dir_url(__FILE__) . 'inc/sortable.js', array(), null, true);
         wp_enqueue_script('tasks-sortable', plugin_dir_url(__FILE__) . 'inc/tasks-sortable.js', array('jquery', 'sortablejs'), '1.0.0', true);
         wp_localize_script(
             'tasks-sortable',

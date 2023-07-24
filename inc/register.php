@@ -1,8 +1,8 @@
 <?php
-
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // Register custom post type "tasks"
-add_action('init', 'register_tasks_post_type');
-function register_tasks_post_type() {
+add_action('init', 'TMBC_register_tasks_post_type');
+function TMBC_register_tasks_post_type() {
   $labels = array(
     'name' => __('Tasks'),
     'singular_name' => __('Task'),
@@ -32,11 +32,7 @@ function register_tasks_post_type() {
   );
 
   register_post_type('tasks', $args);
-}
 
-// Register custom taxonomy "progress"
-add_action('init', 'register_progress_taxonomy');
-function register_progress_taxonomy() {
   $labels = array(
     'name' => __('Progress'),
     'singular_name' => __('Progress'),

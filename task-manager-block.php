@@ -14,12 +14,14 @@
  * @package           create-block
  */
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 include 'inc/register.php';
 include 'inc/ajax_update.php';
 include 'inc/tasks_shortcode.php';
 
 // Register Block
-function create_block_task_manager_block_block_init()
+function TMBC_create_block_task_manager_block_block_init()
 {
     register_block_type(
         __DIR__ . '/build',
@@ -28,12 +30,12 @@ function create_block_task_manager_block_block_init()
         )
     );
 }
-add_action('init', 'create_block_task_manager_block_block_init');
+add_action('init', 'TMBC_create_block_task_manager_block_block_init');
 
 // **************************************************
 // Load scripts
 // **************************************************
-function enqueue_sortable_scripts()
+function TMBC_enqueue_sortable_scripts()
 {
     if (current_user_can('administrator') && has_block('tasks-manager/tasks-progress')) {
         wp_enqueue_script('sortablejs', plugin_dir_url(__FILE__) . 'inc/sortable.js', array(), null, true);
@@ -48,4 +50,4 @@ function enqueue_sortable_scripts()
         );
     }
 }
-add_action('wp_enqueue_scripts', 'enqueue_sortable_scripts');
+add_action('wp_enqueue_scripts', 'TMBC_enqueue_sortable_scripts');

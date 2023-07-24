@@ -1,5 +1,5 @@
 <?php
-
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Processes a block attributes, and also ignores the attribute when the value is empty.
  * 
@@ -8,7 +8,7 @@
  * 
  * @return string Processed attribute.
  */
-function tm_process_attributes($attribute, $value)
+function TMBC_process_attributes($attribute, $value)
 {
 
     if ('' === $value || empty($value)) {
@@ -18,7 +18,7 @@ function tm_process_attributes($attribute, $value)
     return sprintf('%1$s="%2$s"', $attribute, $value);
 }
 
-function tasks_shortcode($_, $block_content)
+function TMBC_tasks_shortcode($_, $block_content)
 {
     $blockprops = json_decode($block_content, true);
 
@@ -49,7 +49,7 @@ function tasks_shortcode($_, $block_content)
     <div <?php echo $wrapper_attributes; ?>>
         <?php foreach ($terms as $term) : ?>
             <div class="tasks-group-wrap">
-                <h3 <?php echo tm_process_attributes('style', $blockprops['listTypographyStyles']); ?>><?php echo $term->name; ?></h3>
+                <h3 <?php echo esc_attr(TMBC_process_attributes('style', $blockprops['listTypographyStyles'])); ?>><?php echo esc_attr($term->name); ?></h3>
 
                 <?php
                 $task_args = array(
@@ -69,12 +69,12 @@ function tasks_shortcode($_, $block_content)
                 $tasks = new WP_Query($task_args);
                 ?>
 
-                <div class="tasks-list" id="<?php echo $term->slug; ?>" data-term-id="<?php echo $term->term_id; ?>" <?php echo tm_process_attributes('style', $blockprops['listStyles']); ?>>
+                <div class="tasks-list" id="<?php echo esc_attr($term->slug); ?>" data-term-id="<?php echo esc_attr($term->term_id); ?>" <?php echo esc_attr(TMBC_process_attributes('style', $blockprops['listStyles'])); ?>>
 
                     <?php if ($tasks->have_posts()) : ?>
                         <?php while ($tasks->have_posts()) : $tasks->the_post(); ?>
-                            <div class="task-item" data-id="<?php echo get_the_ID(); ?>" <?php echo tm_process_attributes('style', $blockprops['cardStyles']); ?>>
-                                <span class="task-title" <?php echo tm_process_attributes('style', $blockprops['cardTypographyStyles']); ?>><?php echo get_the_title(); ?></span>
+                            <div class="task-item" data-id="<?php echo get_the_ID(); ?>" <?php echo esc_attr(TMBC_process_attributes('style', $blockprops['cardStyles'])); ?>>
+                                <span class="task-title" <?php echo esc_attr(TMBC_process_attributes('style', $blockprops['cardTypographyStyles'])); ?>><?php echo get_the_title(); ?></span>
                                 <button class="read-more wp-element-button" data-id="<?php echo get_the_ID(); ?>">Read More</button>
                                 <dialog class="task-content" id="task-content-<?php echo get_the_ID(); ?>">
                                     <div class="wrap">
@@ -100,4 +100,4 @@ function tasks_shortcode($_, $block_content)
 <?php
     return ob_get_clean();
 }
-add_shortcode('tasks_progress', 'tasks_shortcode');
+add_shortcode('tasks_progress', 'TMBC_tasks_shortcode');

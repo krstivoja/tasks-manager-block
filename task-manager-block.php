@@ -26,7 +26,7 @@ function TMBC_create_block_task_manager_block_block_init()
     register_block_type(
         __DIR__ . '/build',
         array(
-            'render_callback' => 'tasks_shortcode',
+            'render_callback' => 'TMBC_tasks_shortcode',
         )
     );
 }

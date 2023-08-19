@@ -4,3 +4,4 @@ build/
 
 # Ignore Visual Studio Code
 .vscode
+**/.DS_Store

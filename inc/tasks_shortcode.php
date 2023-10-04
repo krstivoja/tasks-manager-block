@@ -46,7 +46,7 @@ function TMBC_tasks_shortcode($_, $block_content)
 
 ?>
 
-    <div <?php echo $wrapper_attributes; ?>>
+    <div <?php echo wp_kses($wrapper_attributes); ?>>
         <?php foreach ($terms as $term) : ?>
             <div class="tasks-group-wrap">
                 <h3 <?php echo esc_attr(TMBC_process_attributes('style', $blockprops['listTypographyStyles'])); ?>><?php echo esc_attr($term->name); ?></h3>
@@ -73,18 +73,18 @@ function TMBC_tasks_shortcode($_, $block_content)
 
                     <?php if ($tasks->have_posts()) : ?>
                         <?php while ($tasks->have_posts()) : $tasks->the_post(); ?>
-                            <div class="task-item" data-id="<?php echo get_the_ID(); ?>" <?php echo esc_attr(TMBC_process_attributes('style', $blockprops['cardStyles'])); ?>>
-                                <span class="task-title" <?php echo esc_attr(TMBC_process_attributes('style', $blockprops['cardTypographyStyles'])); ?>><?php echo get_the_title(); ?></span>
-                                <button class="read-more wp-element-button" data-id="<?php echo get_the_ID(); ?>">Read More</button>
-                                <dialog class="task-content" id="task-content-<?php echo get_the_ID(); ?>">
+                            <div class="task-item" data-id="<?php echo esc_attr(get_the_ID()); ?>" <?php echo esc_attr(TMBC_process_attributes('style', $blockprops['cardStyles'])); ?>>
+                                <span class="task-title" <?php echo esc_attr(TMBC_process_attributes('style', $blockprops['cardTypographyStyles'])); ?>><?php echo esc_html(get_the_title()); ?></span>
+                                <button class="read-more wp-element-button" data-id="<?php echo esc_attr(get_the_ID()); ?>">Read More</button>
+                                <dialog class="task-content" id="task-content-<?php echo esc_attr(get_the_ID()); ?>">
                                     <div class="wrap">
-                                        <h1><?php echo get_the_title(); ?></h1>
-                                        <?php echo get_the_content(); ?>
+                                        <h1><?php echo esc_html(get_the_title()); ?></h1>
+                                        <?php echo get_the_content(get_the_content()); ?>
                                         <div class="actions">
                                             <?php if (current_user_can('administrator')) : ?>
-                                                <a class="edit-task" href="<?php echo get_edit_post_link(get_the_ID()); ?>" target="_blank">Edit</a>
+                                                <a class="edit-task" href="<?php echo esc_url(get_edit_post_link(esc_attr(get_the_ID()))); ?>" target="_blank">Edit</a>
                                             <?php endif; ?>
-                                            <button class="close-dialog" data-id="<?php echo get_the_ID(); ?>">Close</button>
+                                            <button class="close-dialog" data-id="<?php echo esc_attr(get_the_ID()); ?>">Close</button>
                                         </div>
                                     </div>
                                 </dialog>
